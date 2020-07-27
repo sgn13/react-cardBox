@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Sidebar from '../sidebar';
+import { Link, NavLink } from "react-router-dom";
 
 function Nav() {
     return (
@@ -20,37 +21,37 @@ function Nav() {
                         <div className="links-container">
                             <ul className="links">
                                 <li>
-                                    <a href="#" className="scroll-link">home</a>
+                                    <NavLink to="/" className="scroll-link">home</NavLink>
                                 </li>
                                 <li>
-                                    <a href="#" className="scroll-link">Design templates</a>
+                                    <NavLink to="/design" className="scroll-link">Design templates</NavLink>
                                 </li>
                                 <li>
-                                    <a href="#" className="scroll-link">Gallery</a>
+                                    <NavLink to="/gallery" className="scroll-link">Gallery</NavLink>
                                 </li>
                                 <li>
-                                    <a href="#" className="scroll-link">Help</a>
+                                    <NavLink to="/help" className="scroll-link">Help</NavLink>
                                 </li>
                             </ul>
                         </div>
                         <div className="social">
-                            <button> Login</button>
-                            <button>Sign up</button>
+                            <button> <NavLink to='/login'>Login</NavLink></button>
+                            <button><NavLink to='/signin'>Sign Up</NavLink></button>
                         </div>
                     </div>
                 </nav>
 
             </header>
 
-            <Sidebar />
+            {/* <Sidebar /> */}
 
             {/* <!-- cava board  -->
     <!-- ----------------------- -->
     <!-- ------------------------------ --> */}
 
-            <div className="canva-board">
+            {/* <div className="canva-board">
                 <div id="canBoard"></div>
-            </div>
+            </div> */}
 
 
         </div>

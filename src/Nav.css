@@ -257,13 +257,11 @@ nav {
   font-weight: bold;
   padding: 0.75rem 0;
 }
+
 .links a:hover {
   color: var(--clr-grey-1);
 }
-.card{
-  display:flex;
-  flex-wrap: wrap;
-}
+
 @media screen and (min-width: 800px) {
   nav {
     background: black;
@@ -356,16 +354,6 @@ nav {
     cursor: pointer;
   }
 
-.card img{
-  height: 20rem;
-  width: 20rem;
-  border-radius: 10px;
-  margin: 30px;
-}
-.card h4{
-  text-align: center;
-  font-family: var(--ff-secondary);
-}
 
  .canva-board{
     float: left;
