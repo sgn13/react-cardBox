@@ -5,6 +5,7 @@ Fonts
 */
 @import url("https://fonts.googleapis.com/css?family=Open+Sans|Roboto:400,700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script:wght@700&family=Lobster&family=Rowdies:wght@300;700&family=Teko:wght@500&display=swap');
 /*
 =============== 
 Variables
@@ -340,16 +341,19 @@ nav {
 .social button{
     background: transparent;
     border: none;
-    color: rgb(0, 27, 21);
+    /* color: white; */
     margin:0 1rem;
     font-size: 1rem;
-    background-color: aqua;
+    background-color: rgb(235, 87, 19);
     opacity: 0.8;
     padding: 0.5rem 2rem;
     border-radius: 10px;
   }
+  .social button a{
+    color: white;
+  }
   .social button:hover{
-    background-color: aquamarine;
+    background-color: rgb(207, 204, 14);
     transition:var(--transition);
     cursor: pointer;
   }
@@ -358,20 +362,18 @@ nav {
  .canva-board{
     float: left;
     position: relative;
-    top: 160px;
-    left: 160px;
-    width: 800px;
-    min-height: 500px;
+    min-width: 1000px;
+    min-height: 1000px;
     height: auto;
     border: 1px solid silver;
 }
 #canBoard{
-  height: 300px;
-  width: 600px;
+  height: 2in;
+  width: 3.5in;
     margin: 90px auto;
     /* padding: 20px; */
     /* background-color: a   qua; */
-    position: relative;
+    /* position: relative; */
   border: 1px solid silver;
 
 }
@@ -410,6 +412,8 @@ nav {
   width: 20%;
   border-left: none;
   height: 900px;
+  background-color: rgb(49, 49, 49);
+  color: wheat;
 }
 
 

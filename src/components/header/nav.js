@@ -49,9 +49,7 @@ function Nav() {
     <!-- ----------------------- -->
     <!-- ------------------------------ --> */}
 
-            {/* <div className="canva-board">
-                <div id="canBoard"></div>
-            </div> */}
+
 
 
         </div>
