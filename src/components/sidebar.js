@@ -1,43 +1,49 @@
 import React, { Component } from 'react';
 import { Link, NavLink } from "react-router-dom";
 import Canva from './canva/canva'
+import { Rectangle, Circle, Ellipse, Line, Polyline, CornerBox, Triangle } from 'react-shapes';
+
 import Template from './templates/template'
+import Draggable from "react-draggable";
 class Sidebar extends Component {
 
     state = {
         color: '',
         font: '',
+        fontsize: '',
+        bold: '',
+        italic: '',
+        underline: '',
         company: 'Company Name',
         phone: '9841653684',
         address: 'kathmandu,Nepal',
-        email: 'kathmandujob@gmail.com'
+        email: 'kathmandujob@gmail.com',
+        text1: '',
+        styles: {},
+        disabled: false
+
+
+
     }
-    companyName = (e) => {
+    fontSize = (e) => {
         e.preventDefault();
-        var cname = e.target.value;
+        var fonts = e.target.value;
         this.setState({
-            company: cname
+            fontsize: fonts
         })
     }
-    phoneNumber = (e) => {
+    changeData = (e) => {
         e.preventDefault();
-        var phone = e.target.value;
         this.setState({
-            phone: phone
+            [e.target.id]: e.target.value
         })
     }
-    Address = (e) => {
+    makeBold = (e) => {
         e.preventDefault();
-        var add = e.target.value;
+        console.log(e.target.value)
         this.setState({
-            address: add
-        })
-    }
-    Email = (e) => {
-        e.preventDefault();
-        var email = e.target.value;
-        this.setState({
-            email: email
+            [e.target.id]: e.target.value
+
         })
     }
     setBackground = (e) => {
@@ -57,10 +63,31 @@ class Sidebar extends Component {
     }
     pickColor = (e) => {
         e.preventDefault();
-        var pick = e.getAttribute('data-color');
-        console.log(pick);
+        var pick = e.target.id;
+        this.setState({
+            color: pick
+        })
     }
+    addText = () => {
+        var x = document.createElement("input");
+        x.setAttribute("type", "text");
+        x.setAttribute("placeholder", "Hello World!");
+        document.body.appendChild(x);
+    }
+    closeTab = () => {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+    }
+
+
+
     render() {
+        const { disabled } = this.state;
+
         function openCity(cityName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tabcontent");
@@ -84,13 +111,17 @@ class Sidebar extends Component {
                 </div>
 
                 <div id="templates" className="tabcontent" style={{ display: "block" }}>
-                    <h3>Templates</h3>
-                    <p>Help me ?</p><Template changeBack={this.state.color} changeBack={this.state.color} company={this.state.company} number={this.state.phone} address={this.state.address} email={this.state.email} />
+                    <button onClick={this.closeTab} style={{ float: 'right' }}>x</button>
+                    <h3 >Templates</h3>
+                    <p>Help me ?</p>
+                    <Template changeBack={this.state.color} changeBack={this.state.color} company={this.state.company} number={this.state.phone} address={this.state.address} email={this.state.email} />
 
                 </div>
                 <div id="background" className="tabcontent" style={{ display: "none" }}>
+                    <button onClick={this.closeTab} style={{ float: 'right' }}>x</button>
                     <h3>Background</h3>
                     <p>Help me ?</p>
+
                     <div>
                         <select onChange={this.setBackground} id="color-selector">
                             <option value="none">None</option>
@@ -106,20 +137,21 @@ class Sidebar extends Component {
 
                         </select>
                         <div className="color-grid">
-                            <div className="color-picker red" onClick={this.pickColor} data-color="red"></div>
-                            <div className="color-picker blue" onClick={this.pickColor} data-color="blue"></div>
-                            <div className="color-picker orange" onClick={this.pickColor} data-color="orange"></div>
-                            <div className="color-picker yellow" onClick={this.pickColor} data-color="yellow"></div>
-                            <div className="color-picker purple" onClick={this.pickColor} data-color="purple"></div>
-                            <div className="color-picker aliceblue" onClick={this.pickColor} data-color="aliceblue"></div>
-                            <div className="color-picker orangered" onClick={this.pickColor} data-color="orangered"></div>
-                            <div className="color-picker brown" onClick={this.pickColor} data-color="brown"></div>
-                            <div className="color-picker black" onClick={this.pickColor} data-color="black"></div>
-                            <div className="color-picker white" onClick={this.pickColor} data-color="white"></div>
+                            <div className="color-picker red" onClick={this.pickColor} id="red"></div>
+                            <div className="color-picker blue" onClick={this.pickColor} id="blue"></div>
+                            <div className="color-picker orange" onClick={this.pickColor} id="orange"></div>
+                            <div className="color-picker yellow" onClick={this.pickColor} id="yellow"></div>
+                            <div className="color-picker purple" onClick={this.pickColor} id="purple"></div>
+                            <div className="color-picker aliceblue" onClick={this.pickColor} id="aliceblue"></div>
+                            <div className="color-picker orangered" onClick={this.pickColor} id="orangered"></div>
+                            <div className="color-picker brown" onClick={this.pickColor} id="brown"></div>
+                            <div className="color-picker black" onClick={this.pickColor} id="black"></div>
+                            <div className="color-picker white" onClick={this.pickColor} id="white"></div>
                         </div>
                     </div>
                 </div>
                 <div id="text" className="tabcontent" style={{ display: "none" }}>
+                    <button onClick={this.closeTab} style={{ float: 'right' }}>x</button>
                     <h3>Text</h3>
                     <h3>Select Fonts</h3>
                     <select onChange={this.setFont} id="font-selector">
@@ -143,17 +175,69 @@ class Sidebar extends Component {
 
 
                     </select>
-                    <input type='text' placeholder="Company name" onChange={this.companyName}></input>
-                    <input type='number' placeholder="Phone number" onChange={this.phoneNumber}></input>
-                    <input type='text' placeholder="Address" onChange={this.Address}></input>
-                    <input type='email' placeholder="Email" onChange={this.Email}></input>
+                    <select onChange={this.fontSize}>
+                        <option value="10">10</option>
+                        <option value="14">14</option>
+                        <option value="16">16</option>
+                        <option value="18">18</option>
+                        <option value="20">20</option>
+                        <option value="24">24</option>
+                        <option value="30">30</option>
+                    </select>
+                    <button onClick={this.makeBold} id="bold" value="bold">B</button>
+                    <button onClick={this.makeBold} id="italic" value="italic">I</button>
+                    <button onClick={this.makeBold} id="underline" value="underline">U</button>
+
+                    <div id="information" >
+                        <span>Company name</span>
+                        <input type='text' placeholder="Company name" onChange={this.changeData} id="company"></input><br />
+                        <span>Phone</span><br />
+                        <input type='text' placeholder="Phone number" onChange={this.changeData} id="phone"></input><br />
+                        <span>Address</span><br />
+                        <input type='text' placeholder="Address" onChange={this.changeData} id="address"></input><br />
+                        <span>Email</span><br />
+                        <input type='text' placeholder="Email" onChange={this.changeData} id="email"></input>
+                        <br />
+                        <br />
+                        <button onClick={this.addText}>Add</button>
+                    </div>
                 </div>
                 <div id="shapes" className="tabcontent" style={{ display: "none" }}>
+                    <button onClick={this.closeTab} style={{ float: 'right' }}>x</button>
 
                     <h3>Shapes</h3>
                     <p>Choose your shapes</p>
+                    <Draggable disabled={disabled} bounds=".canva-board">
+                        <div
+                            style={{ width: 150 }}
+                            className={!disabled ? "draggable" : null}
+                        >
+                            {/* <h4 style={{ height: 20, userSelect: "none" }}>
+                                {!disabled && "Drag Me"}
+                            </h4> */}
+                            {/* {this.state.edit ? this.renderEditView() : this.renderDefaulView()}
+                            <p style={{ fontFamily: this.props.changeFont, color: 'black' }}>{this.props.number}</p> */}
+                            {/* <p style={{ fontFamily: this.props.changeFont, color: 'black' }}>{this.props.address}</p>
+                            <p style={{ fontFamily: this.props.changeFont, color: 'black' }}>{this.props.email}</p> */}
+                            {/* <Rectangle width={100} height={100} fill={{ color: 'red' }} stroke={{ color: 'black' }} strokeWidth={1} /><br></br> */}
+                            <div style={{ height: '150px', width: '150px', zIndex: '999', backgroundColor: 'blue' }}></div>
+                            {/* <button
+                                className="uk-button uk-button-primary"
+                                onClick={this.toggleDraggable}
+                            >
+                                {disabled ? "Enable" : "Disable"} Drag
+                            </button> */}
+                        </div>
+                    </Draggable>
+
+                    <Circle r={50} fill={{ color: 'white' }} stroke={{ color: 'black' }} strokeWidth={1} /><br />
+                    {/* <Ellipse rx={30} ry={10} fill={{ color: '#2409ba' }} stroke={{ color: '#E65243' }} strokeWidth={3} />
+                    <Polyline points='25,25 25,350 500,350 500,500 305,250 20,15' fill={{ color: '#2409ba' }} stroke={{ color: '#E65243' }} strokeWidth={3} />
+                    <CornerBox size={400} width={150} orientation='topLeft' fill={{ color: '#2409ba' }} stroke={{ color: '#E65243' }} strokeWidth={3} /> */}
+                    <Triangle width={100} height={100} fill={{ color: 'white' }} stroke={{ color: 'black' }} strokeWidth={1} />
+
                 </div>
-                <Canva changeFont={this.state.font} changeBack={this.state.color} company={this.state.company} number={this.state.phone} address={this.state.address} email={this.state.email} />
+                <Canva changeFont={this.state.font} changeFsize={this.state.fontsize} cBold={this.state.bold} changeBack={this.state.color} company={this.state.company} number={this.state.phone} address={this.state.address} email={this.state.email} />
             </div>
         );
     }

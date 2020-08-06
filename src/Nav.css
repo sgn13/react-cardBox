@@ -113,12 +113,13 @@ h4 {
   font-size: 0.875rem;
 }
 p {
-  margin-bottom: 1.25rem;
+  margin-bottom: 1rem;
   color: var(--clr-grey-5);
 }
 @media screen and (min-width: 800px) {
   h1 {
     font-size: 3rem;
+    
   }
   h2 {
     font-size: 2.5rem;
@@ -361,19 +362,22 @@ nav {
 
  .canva-board{
     float: left;
-    position: relative;
-    min-width: 1000px;
-    min-height: 1000px;
-    height: auto;
+    min-width: 1010px;
+    min-height: 860px;
+    /* background-color: silver; */
+    /* height: auto; */
     border: 1px solid silver;
+    position: relative;
+    /* overflow: visible hidden; */
 }
 #canBoard{
   height: 2in;
   width: 3.5in;
-    margin: 90px auto;
-    /* padding: 20px; */
-    /* background-color: a   qua; */
-    /* position: relative; */
+    margin: 90px auto; 
+    padding: 20px;
+    background-color: aqua;
+    position: absolute;
+    display: block;
   border: 1px solid silver;
 
 }
@@ -478,4 +482,14 @@ nav {
   grid-template-columns: auto auto auto auto ;
   grid-template-rows: auto;
   margin-top: 20%;
+}
+
+/* information section  */
+/* ////////////////////////// */
+.information{
+  position: absolute;
+  height: calc(100vh - 50px);
+  width: calc(100vh - 100px);
+  padding: 20px;
+  /* display: block; */
 }
