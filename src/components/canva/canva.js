@@ -112,7 +112,6 @@ class Canva extends Component {
                         onMouseUp={this.handleEvent}
                         onTouchStart={this.handleEvent}
                         onTouchEnd={this.handleEvent}
-                        grid={[100, 100]}
                         onDrag={this.handleDrag}>
                         <div
                             style={{ width: 150 }}
@@ -148,7 +147,7 @@ class Canva extends Component {
                         >
 
 
-                            <p style={{ fontFamily: this.props.changeFont, fontSize: this.props.changeFsize, color: 'black' }}>{this.props.number}</p>
+                            <p style={{ fontFamily: this.props.changeFont, fontStyle: this.props.cBold, color: 'black' }}>{this.props.number}</p>
                             {/* <p style={{ fontFamily: this.props.changeFont, color: 'black' }}>{this.props.address}</p>
                             <p style={{ fontFamily: this.props.changeFont, color: 'black' }}>{this.props.email}</p> */}
 
