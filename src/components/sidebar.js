@@ -176,13 +176,13 @@ class Sidebar extends Component {
 
                     </select>
                     <select onChange={this.fontSize}>
-                        <option value="10">10</option>
-                        <option value="14">14</option>
-                        <option value="16">16</option>
-                        <option value="18">18</option>
-                        <option value="20">20</option>
-                        <option value="24">24</option>
-                        <option value="30">30</option>
+                        <option value="10px">10</option>
+                        <option value="14px">14</option>
+                        <option value="16px">16</option>
+                        <option value="18px">18</option>
+                        <option value="20px">20</option>
+                        <option value="24px">24</option>
+                        <option value="30px">30</option>
                     </select>
                     <button onClick={this.makeBold} id="bold" value="bold">B</button>
                     <button onClick={this.makeBold} id="italic" value="italic">I</button>
