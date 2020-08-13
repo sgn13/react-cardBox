@@ -7,6 +7,7 @@
 
 .banner {
   min-height: 15vh;
+  
   display: grid;
   place-items: center;
   text-align: center;
