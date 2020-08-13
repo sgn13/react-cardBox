@@ -156,10 +156,13 @@ p {
   border: none;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   border-radius: var(--radius);
+  text-decoration: none;
 }
 .btn1:hover {
   color: var(--clr-white);
   background: var(--clr-black);
+  text-decoration: none;
+
 }
 .btn1-white {
   color: black;
@@ -167,6 +170,8 @@ p {
   padding: 5px 20px 5px 20px;
   border-radius: 15;
   padding: 0.5rem 1rem;
+  text-decoration: none;
+
 }
 .btn1:hover {
   background: var(--clr-white);
@@ -341,24 +346,16 @@ nav {
   }
 }
 
-.social button{
-    background: transparent;
-    border: none;
-    /* color: white; */
-    margin:0 1rem;
-    font-size: 1rem;
-    background-color: rgb(235, 87, 19);
-    opacity: 0.8;
-    padding: 0.5rem 2rem;
-    border-radius: 10px;
-  }
+
   .social button a{
+    text-decoration: none;
+
     color: white;
   }
   .social button:hover{
-    background-color: rgb(207, 204, 14);
     transition:var(--transition);
     cursor: pointer;
+
   }
 
 

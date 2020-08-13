@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Sidebar from '../sidebar';
 import { Link, NavLink } from "react-router-dom";
+import { Button } from 'react-bootstrap';
+
 
 function Nav() {
     return (
@@ -35,8 +37,9 @@ function Nav() {
                             </ul>
                         </div>
                         <div className="social">
-                            <button> <NavLink to='/login'>Login</NavLink></button>
-                            <button><NavLink to='/signin'>Sign Up</NavLink></button>
+                            <Button variant="outline-secondary" className="mr-sm-4"><NavLink to='/login'>Login</NavLink></Button>
+                            <Button variant="outline-secondary" className="mr-sm-4"><NavLink to='/signin'>Sign Up</NavLink></Button>
+
                         </div>
                     </div>
                 </nav>
