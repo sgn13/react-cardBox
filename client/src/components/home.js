@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Nav from './header/nav';
 import '../css/home.css';
 import { Link, NavLink } from "react-router-dom";
+
 class Home extends Component {
     state = {}
     render() {

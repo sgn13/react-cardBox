@@ -358,7 +358,10 @@ nav {
 
   }
 
-
+.strong{
+  color: #fff;
+  font-weight:bold;
+}
  .canva-board{
     float: left;
     min-width: 1010px;

@@ -2,21 +2,21 @@ import React, { Component } from 'react';
 import Template from '../templates/template';
 import Text from '../sidebar/text'
 import Draggable from "react-draggable";
-import { Button } from 'react-bootstrap';
-import { Rnd } from 'react-rnd'
+import Image from '../../image/businessCard/business_background.jpg'
 class Canva extends Component {
     state = {
         edit: false,
-        // diffx: 0,
-        // diffy: 0,
-        // dragging: false,
-        // styles: {},
+        editCompany: false,
         x: '',
         y: '',
         width: '',
         height: '',
         style: '',
-        color: '',
+        fsize: '30px',
+        color: 'black',
+        colorCompany: 'black',
+        font: '',
+        shape: 'false',
         activeDrags: 0,
         deltaPosition: {
             x: 0, y: 0
@@ -26,6 +26,12 @@ class Canva extends Component {
 
     // Editing text
     //////////////////////////////
+    fontsize = (e) => {
+        this.setState({
+            fsize: e.target.value
+        })
+        console.log(e.target.value)
+    }
     handleDrag = (e, ui) => {
         const { x, y } = this.state.deltaPosition;
         this.setState({
@@ -73,54 +79,82 @@ class Canva extends Component {
         })
 
     }
+    companySelect = () => {
+        this.setState({
+            editCompany: !this.state.editCompany
+        })
+    }
     SeletectText = (e) => {
         console.log(e);
         this.setState({
-            color: e
+            color: e,
+            colorCompany: e
         })
     }
+    selectFont = (e) => {
+        this.setState({
+            font: e
+        })
 
+    }
     toggleDraggable = () =>
         this.setState(prevState => ({ disabled: !this.state.disabled }));
 
-    render() {
-        const style = {
+    changeShape = () => {
+        this.setState({
+            shape: !this.state.shape
+        })
+        console.log(this.state.shape)
 
-        }
-        const { disabled } = this.state;
+    }
+
+    render() {
+        // const style = {
+
+        // }
+        // const { disabled } = this.state;
         return (
-            <div className="canva-board">
-                <Text selected={this.SeletectText} />
-                <Rnd
-                    ref={c => { this.rnd = c; }}
-                    initial={{
-                        x: window.innerWidth / 2 - 200,
-                        y: window.innerHeight / 2 - 80,
-                        width: 400,
-                        height: 160,
-                    }}
-                    style={style}
-                    minWidth={300}
-                    minHeight={160}
-                    maxWidth={800}
-                    maxHeight={300}
-                    bounds={'parent'}
-                >
-                    <span className="box">
-                        resize and drag me!!
-  </span>
-                </Rnd>
+            <div className="canva-board" >
+
 
 
                 <div>x: {this.state.deltaPosition.x.toFixed(0)}, y: {this.state.deltaPosition.y.toFixed(0)}</div>
-                <div className="container" style={{ width: '500px', backgroundColor: this.props.changeBack, height: '250px', border: '1px solid black', position: 'absolute', margin: '200px' }}>
+
+                {this.state.shape ? (<div className="container" style={{ width: '500px', backgroundColor: this.props.changeBack, backgroundImage: "url(" + this.props.changeBackImage + ")", height: '250px', border: '1px solid black', position: 'absolute', margin: '200px' }}>
+
+                    {/* company  */}
+                    {/* ................ */}
+                    {this.state.editCompany ? <Draggable bounds="parent" onDrag={this.handleDrag}  >
+                        <div style={{ width: 250, position: 'relative' }}>
+                            <p style={{ fontFamily: this.props.changeFont, fontSize: this.props.changeFsize, color: this.state.colorCompany, }} onDoubleClick={this.companySelect}>{this.props.company}</p>
+                        </div>
+                    </Draggable> :
+                        <Draggable bounds="parent" onDrag={this.handleDrag}  >
+                            <div style={{ width: 250, position: 'relative' }}>
+                                <p style={{ fontFamily: this.props.changeFont, fontSize: this.props.changeFsize, color: 'black', }} onDoubleClick={this.companySelect}>{this.props.company}</p>
+                            </div>
+                        </Draggable>}
+
+                    {/* company  */}
+                    {/* ................ */}
+
+                    <Draggable bounds="parent" onDrag={this.handleDrag}  >
+                        <div style={{ width: 150, position: 'relative' }}>
+                            <p style={{ fontFamily: this.props.changeFont, color: 'black' }} onDoubleClick={this.emailSelect}>{this.props.number}</p>
+                        </div>
+                    </Draggable>
+                    <Draggable bounds="parent" onDrag={this.handleDrag}  >
+                        <div style={{ width: 150, position: 'relative' }}>
+                            <p style={{ fontFamily: this.props.changeFont, color: 'black' }} onDoubleClick={this.emailSelect}>{this.props.address}</p>
+                        </div>
+                    </Draggable>
                     {this.state.edit ? <Draggable bounds="parent" onDrag={this.handleDrag}  >
                         <div style={{ width: 150 }}>
-                            <p style={{ fontFamily: this.props.changeFont, fontSize: this.props.changeFsize, color: this.state.color }} onDoubleClick={this.emailSelect}>{this.props.email}</p>
+                            <p style={{ fontFamily: this.props.changeFont, fontFamily: this.state.font, fontsize: this.state.fsize, color: "red" }} onDoubleClick={this.emailSelect}>{this.props.email}</p>
                         </div>
                     </Draggable> : <Draggable bounds="parent" onDrag={this.handleDrag}  >
                             <div style={{ width: 150 }}>
-                                <p style={{ fontFamily: this.props.changeFont, fontSize: this.props.changeFsize, color: 'black' }} onDoubleClick={this.emailSelect}>{this.props.email}</p>
+                                <p style={{ fontFamily: this.props.changeFont, color: 'black', color: this.state.color, fontFamily: this.state.font, }} onDoubleClick={this.emailSelect}>{this.props.email}</p>
                             </div>
                         </Draggable>}
                     {/* 
@@ -164,32 +198,24 @@ class Canva extends Component {
                         </div>
                     </Draggable>
 
+                </div>) : (<div className='containers  ' style={{ width: '400px', height: '500px', border: '1px solid black', position: 'absolute', margin: '200px' }}></div>)
 
+                }
+                {/* {
+                    this.state.shape ? (<div className='containers  ' style={{ width: '400px', height: '500px', border: '1px solid black', position: 'absolute', margin: '200px' }}></div>
+                    ) : null
+                } */}
 
+                <div style={{ float: 'left' }}>
+                    <div onClick={this.changeShape} style={{ height: ".5in", width: '1in', border: '1px solid', fontsize: '1px' }}>Business card</div>
+                    <div onClick={this.changeShape} style={{ height: "1in", width: '0.5in', border: '1px solid', fontsize: '1px' }}>Banner</div>
 
                 </div>
-
-                {/* {this.state.styles.left} {this.state.styles.top} */}
-
-
-                {/* <div id="canBoard" style={{
-                    backgroundColor: this.props.changeBack,
-                }}>
-                    <h3 style={{ fontFamily: this.props.changeFont }}>Font family</h3>
-                    <div className='information' style={this.state.styles} onMouseDown={this.dragStart} onMouseMove={this.dragging} onMouseUp={this.dragEnd}>
-
-                        {this.state.edit ? this.renderEditView() : this.renderDefaulView()}
-
-                        <p style={{ fontFamily: this.props.changeFont }}>{this.props.number}</p>
-                        <p style={{ fontFamily: this.props.changeFont }}>{this.props.address}</p>
-                        <p style={{ fontFamily: this.props.changeFont }}>{this.props.email}</p>
-
-                    </div>
-
-                </div> */}
+                <Text selected={this.SeletectText} selectFont={this.selectFont} fontsize={this.fontsize} />
 
 
-                {/* <Template /> */}
+
+
             </div >
         );
     }

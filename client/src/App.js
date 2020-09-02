@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Nav from './components/header/nav';
 import './Nav.css';
 import { BrowserRouter, Route } from 'react-router-dom';
@@ -9,20 +9,32 @@ import Help from './components/help';
 import Sidebar from './components/sidebar';
 import Home from './components/home';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Board from './components/templates/board'
 
-function App() {
-  return (
-    <BrowserRouter>
-      <Nav />
-      <Route path='/gallery' component={Gallery} />
-      <Route path='/help' component={Help} />
-      <Route path='/design' component={Sidebar} />
-      <Route path='/login' component={Login} />
-      <Route path='/signin' component={SignIn} />
-      <Route path='/' exact component={Home} />
+import { Provider } from 'react-redux';
+import store from './components/flux/store';
+import { loadUser } from './components/flux/action/authAction';
 
-    </BrowserRouter>
-  );
+class App extends Component {
+  componentDidMount() {
+    store.dispatch(loadUser());
+  }
+
+  render() {
+    return (
+      <Provider store={store}>
+        <BrowserRouter>
+          <Nav />
+          <Route path='/gallery' component={Gallery} />
+          <Route path='/help' component={Help} />
+          <Route path='/board' component={Board} />
+          <Route path='/design' component={Sidebar} />
+          <Route path='/' exact component={Home} />
+
+        </BrowserRouter>
+      </Provider>
+    );
+  }
 }
 
 export default App;

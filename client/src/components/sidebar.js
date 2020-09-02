@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
 import { Link, NavLink } from "react-router-dom";
 import Canva from './canva/canva'
+import BannerCanva from './canva/banner-canva'
 import { Rectangle, Circle, Ellipse, Line, Polyline, CornerBox, Triangle } from 'react-shapes';
 import Text from './sidebar/text'
 import { Button } from 'react-bootstrap';
 import Template from './templates/template'
 import Draggable from "react-draggable";
 import { Rnd } from 'react-rnd'
+import Image from '../image/businessCard/business_background.jpg'
+import Shape from './sidebar/shape'
+
 
 class Sidebar extends Component {
 
     state = {
-        x: '',
-        y: '',
-        width: '',
-        height: '',
+
         color: '',
+        backgroundImage: 'https://www.pexels.com/photo/abstract-ancient-antique-art-235985/',
         font: '',
         fontsize: '',
         bold: '',
@@ -35,7 +37,6 @@ class Sidebar extends Component {
         styles: {},
         addid: 0,
 
-        disabled: false
 
 
 
@@ -84,13 +85,14 @@ class Sidebar extends Component {
         })
     }
 
-    addText = () => {
+    changeBackImage = (e) => {
+        this.setState({
+            backgroundImage: e.target.id
 
-        // var x = document.createElement("input");
-        // x.setAttribute("type", "text");
-        // x.setAttribute("placeholder", "Hello World!");
-        // document.body.appendChild(x);
-        // var addid = 0;
+        })
+    }
+
+    addText = () => {
         var addList = document.getElementById('information');
         var docstyle = addList.style.display;
         if (docstyle == 'none') addList.style.display = '';
@@ -115,16 +117,12 @@ class Sidebar extends Component {
 
     }
 
-    showTemplate = () => {
-        return (
-            <div>Hello</div>
-        )
 
-    }
 
 
     render() {
         const { disabled } = this.state;
+        console.log(this.state.backgroundImage)
 
         function openCity(cityName) {
             var i, tabcontent, tablinks;
@@ -143,16 +141,17 @@ class Sidebar extends Component {
             <div>
                 <div className="sidebar">
                     <Link className="tablinks" id="defaultOpen" onClick={() => openCity('templates')} to="#">Templates</Link>
-                    <Link className="tablinks" onClick={() => openCity('background')} to="#">Background</Link>
-                    <Link className="tablinks" onClick={() => openCity('text')} to="#">Text</Link>
-                    <Link className="tablinks" onClick={() => openCity('shapes')} to="#">Shapes</Link>
+                    <Link className="tablinks" onClick={() => openCity('background')} to="#"> <i className="fa fa-chess-board
+                    " ></i><br />Background</Link>
+                    <Link className="tablinks" onClick={() => openCity('text')} to="#"><i className="fa fa-font" style={{ size: '20px' }}></i><br />  Text</Link>
+                    <Link className="tablinks" onClick={() => openCity('shapes')} to="#"><i className="fas fa-shapes"></i> Shapes</Link>
                 </div>
 
                 <div id="templates" className="tabcontent" style={{ display: "block" }}>
                     <Button variant="danger" onClick={this.closeTab} style={{ float: 'right' }}>X</Button>
                     <h3 >Templates</h3>
                     <p>Help me ?</p>
-                    <Template onClick={this.showTemplate} changeBack={this.state.color} changeBack={this.state.color} company={this.state.company} number={this.state.phone} address={this.state.address} email={this.state.email} />
+                    {/* <Template onClick={this.showTesmplate} changeBack={this.state.color} changeBack={this.state.color} company={this.state.company} number={this.state.phone} address={this.state.address} email={this.state.email} /> */}
 
                 </div>
                 <div id="background" className="tabcontent" style={{ display: "none" }}>
@@ -187,6 +186,9 @@ class Sidebar extends Component {
                             <div className="color-picker black" onClick={this.pickColor} id="black"></div>
                             <div className="color-picker white" onClick={this.pickColor} id="white"></div>
                         </div>
+                        <div>
+                            <div style={{ width: '10rem', height: '7rem', backgroundImage: `url(${Image})  ` }} id="https://www.pexels.com/photo/abstract-ancient-antique-art-235985/" onClick={this.changeBackImage}> </div>
+                        </div>
                     </div>
                 </div>
                 <div id="text" className="tabcontent" style={{ display: "none" }}>
@@ -213,6 +215,7 @@ class Sidebar extends Component {
 
 
                     </select>
+                    {/* <input type="range" min="0" max="100"></input> */}
                     <select onChange={this.fontSize}>
                         <option value="10px">10</option>
                         <option value="14px">14</option>
@@ -242,52 +245,17 @@ class Sidebar extends Component {
                         <br />
                         <br />
                         {/* <button onClick={this.addText}>Add</button> */}
-                        <Button variant="success" className=" mb-sm-3" size="sm" onClick={this.addText}>Add text</Button>
+                        <Button variant="success" className=" mb-sm-3" size="sm" onClick={this.addText}>Add text <i className="fa fa-plus"></i></Button>
                         <br></br>
                     </div>
                 </div>
                 <div id="shapes" className="tabcontent" style={{ display: "none" }}>
-                    <Button variant="danger" onClick={this.closeTab} style={{ float: 'right' }}>X</Button>
-
-
-                    <h3>Shapes</h3>
-                    <p>Choose your shapes</p>
-                    <Draggable disabled={disabled} bounds=".canva-board">
-                        <div
-                            style={{ width: 150 }}
-                            className={!disabled ? "draggable" : null}
-                        >
-
-                            {/* <Rectangle width={100} height={100} fill={{ color: 'red' }} stroke={{ color: 'black' }} strokeWidth={1} /><br></br> */}
-                            <div style={{ height: '50px', width: '50px', zIndex: '999', backgroundColor: 'blue' }}></div>
-
-                        </div>
-                    </Draggable>
-                    <Rnd
-                        size={{ width: this.state.width, height: this.state.height }}
-                        position={{ x: this.state.x, y: this.state.y }}
-                        onDragStop={(e, d) => { this.setState({ x: d.x, y: d.y }) }}
-                        onResize={(e, direction, ref, delta, position) => {
-                            this.setState({
-                                width: ref.offsetWidth,
-                                height: ref.offsetHeight,
-                                ...position,
-                            });
-                        }}
-                    >
-                        <div style={{ height: '50px', width: '50px', zIndex: '0', backgroundColor: 'blue' }}></div>
-
-
-                    </Rnd>
-
-                    <Circle r={50} fill={{ color: 'white' }} stroke={{ color: 'black' }} strokeWidth={1} /><br />
-                    {/* <Ellipse rx={30} ry={10} fill={{ color: '#2409ba' }} stroke={{ color: '#E65243' }} strokeWidth={3} />
-                    <Polyline points='25,25 25,350 500,350 500,500 305,250 20,15' fill={{ color: '#2409ba' }} stroke={{ color: '#E65243' }} strokeWidth={3} />
-                    <CornerBox size={400} width={150} orientation='topLeft' fill={{ color: '#2409ba' }} stroke={{ color: '#E65243' }} strokeWidth={3} /> */}
-                    <Triangle width={100} height={100} fill={{ color: 'white' }} stroke={{ color: 'black' }} strokeWidth={1} />
+                    <Shape />
 
                 </div>
-                <Canva changeFont={this.state.font} changeFsize={this.state.fontsize} cBold={this.state.bold} changeBack={this.state.color} company={this.state.company} number={this.state.phone} address={this.state.address} email={this.state.email} text1={this.state.text1} text2={this.state.text2} text3={this.state.text3} text4={this.state.text4} text5={this.state.text5} />
+
+                <Canva changeFont={this.state.font} changeFsize={this.state.fontsize} changeBackImage={this.state.changeBackImage} cBold={this.state.bold} changeBack={this.state.color} company={this.state.company} number={this.state.phone} address={this.state.address} email={this.state.email} text1={this.state.text1} text2={this.state.text2} text3={this.state.text3} text4={this.state.text4} text5={this.state.text5} />
+                {/* <BannerCanva /> */}
                 {/* <Text /> */}
             </div>
         );
