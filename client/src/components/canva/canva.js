@@ -3,6 +3,7 @@ import Template from '../templates/template';
 import Text from '../sidebar/text'
 import Draggable from "react-draggable";
 import Image from '../../image/businessCard/business_background.jpg'
+import ColorPicker from '../sidebar/color-picker/colorpicker';
 class Canva extends Component {
     state = {
         edit: false,
@@ -206,13 +207,13 @@ class Canva extends Component {
                     ) : null
                 } */}
 
-                <div style={{ float: 'left' }}>
-                    <div onClick={this.changeShape} style={{ height: ".5in", width: '1in', border: '1px solid', fontsize: '1px' }}>Business card</div>
-                    <div onClick={this.changeShape} style={{ height: "1in", width: '0.5in', border: '1px solid', fontsize: '1px' }}>Banner</div>
+                <div>
+                    <div onClick={this.changeShape} style={{ height: ".5in", width: '1in', border: '1px solid', fontsize: '1px' }}></div>
+                    <div onClick={this.changeShape} style={{ height: "1in", width: '0.5in', border: '1px solid', fontsize: '1px' }}></div>
 
                 </div>
-                <Text selected={this.SeletectText} selectFont={this.selectFont} fontsize={this.fontsize} />
-
+                {/* <Text selected={this.SeletectText} selectFont={this.selectFont} fontsize={this.fontsize} /> */}
+                {/* <ColorPicker /> */}
 
 
 
