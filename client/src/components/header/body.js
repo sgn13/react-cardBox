@@ -8,7 +8,7 @@ class Bodys extends Component {
         return (<div>
             <Sidebar />
             {/* <Canva /> */}
-            <Text />
+            {/* <Text /> */}
         </div>);
     }
 }

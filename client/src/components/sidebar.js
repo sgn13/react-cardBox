@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link, NavLink } from "react-router-dom";
 import Canva from './canva/canva'
+import CanvaNew from './canva/canvaNew'
 import BannerCanva from './canva/banner-canva'
 import { Rectangle, Circle, Ellipse, Line, Polyline, CornerBox, Triangle } from 'react-shapes';
 import Text from './sidebar/text'
@@ -19,6 +20,7 @@ class Sidebar extends Component {
         backgroundImage: 'https://www.pexels.com/photo/abstract-ancient-antique-art-235985/',
         font: '',
         fontsize: '',
+        selectedColor: '',
         bold: '',
         italic: '',
         underline: '',
@@ -85,6 +87,17 @@ class Sidebar extends Component {
         this.setState({
             color: pick
         })
+    }
+    changeSelectedItem = (e) => {
+        // e.preventDefault();
+        var selectedItem = e;
+        this.setState({
+            selectedColor: selectedItem
+        })
+        console.log(selectedItem)
+        // this.setState({
+        //     color: pick
+        // })
     }
 
     changeBackImage = (e) => {
@@ -264,9 +277,29 @@ class Sidebar extends Component {
                     </div>
                 </div>
 
-                <Canva changeFont={this.state.font} changeFsize={this.state.fontsize} changeBackImage={this.state.changeBackImage} cBold={this.state.bold} changeBack={this.state.color} company={this.state.company} number={this.state.phone} address={this.state.address} email={this.state.email} text1={this.state.text1} text2={this.state.text2} text3={this.state.text3} text4={this.state.text4} text5={this.state.text5} />
+                {/* <Canva changeFont={this.state.font} changeFsize={this.state.fontsize} changeBackImage={this.state.changeBackImage} cBold={this.state.bold} changeBack={this.state.color} company={this.state.company} number={this.state.phone} address={this.state.address} email={this.state.email} text1={this.state.text1} text2={this.state.text2} text3={this.state.text3} text4={this.state.text4} text5={this.state.text5} /> */}
+                <CanvaNew
+                    changeFont={this.state.font}
+                    changeFsize={this.state.fontsize}
+                    changeBackImage={this.state.changeBackImage}
+                    cBold={this.state.bold}
+                    changeBack={this.state.color}
+                    selectedColor={this.state.selectedColor}
+                    company={this.state.company}
+                    number={this.state.phone}
+                    address={this.state.address}
+                    email={this.state.email}
+                    text1={this.state.text1}
+                    text2={this.state.text2}
+                    text3={this.state.text3}
+                    text4={this.state.text4}
+                    text5={this.state.text5} />
+
+                {/* <CanvaNew /> */}
                 {/* <BannerCanva /> */}
-                {/* <Text /> */}
+                <Text
+                    selected={this.changeSelectedItem}
+                />
             </div>
         );
     }

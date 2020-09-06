@@ -6,7 +6,7 @@ function ColorPicker() {
     const [showPicker, setShowPicker] = useState(false)
 
 
-    console.log(showPicker)
+    // console.log(showPicker)
     return (
         <div >
             <button onClick={() => setShowPicker(showPicker => !showPicker)} className="toggleColor">{showPicker ? "Close color picker" : "Pick color"}</button>

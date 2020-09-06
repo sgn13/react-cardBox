@@ -6,7 +6,7 @@ class Text extends Component {
 
     state = {
         color: '',
-        colorCompany: '',
+        // colorCompany: '',
         font: ''
 
     }
@@ -16,9 +16,10 @@ class Text extends Component {
         var pick = e.target.id;
         this.setState({
             color: pick,
-            colorCompany: pick
+            // colorCompany: pick
         })
         this.props.selected(pick);
+        // console.log(pick)
     }
     setFont = (e) => {
         e.preventDefault();

@@ -22,7 +22,7 @@ class Shapes extends Component {
                     <Line
                         x={20}
                         y={200}
-                        points={[0, 0, 100, 0, 100, 100]}
+                        points={[0, 100, 100, 0, 100, 50]}
                         tension={0.5}
                         closed
                         stroke="black"
