@@ -1,6 +1,7 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import SliderImage from './silder'
 import SidebarItem from './sidebar-item'
+import ImageF from './imageF'
 import UploadImage from './uploadImg'
 import immm from '../../image/banner.jpg'
 import './filter.css'
@@ -86,8 +87,17 @@ const FilterImage = React.forwardRef((props, ref) => {
     const [options, setOptions] = useState(DEFAULT_OPTIONS)
     const [selectedOptionIndex, setSelectedOptionIndex] = useState(0)
     const [url, setUrl] = useState('')
+    const [img, setImg] = useState('')
+    const [filter, setFilter] = useState('')
 
     const selected = options[selectedOptionIndex]
+
+
+    const handleImageUpload = (e) => {
+        console.log(e.target.files[0])
+        setImg(e.target.files[0])
+
+    }
 
     function handleSliderChange({ target }) {
         setOptions(prevOptions => {
@@ -100,25 +110,31 @@ const FilterImage = React.forwardRef((props, ref) => {
     function getImageStyle() {
         const filters = options.map(option => {
             return `${option.property}(${option.value}${option.unit})`
+
         })
+
         return { filter: filters.join(' ') }
 
-
     }
+
+
+
     function storeURL(url) {
         setUrl(url)
 
     }
-    console.log(props)
-    console.log(getImageStyle())
+
 
     return (
         <div className="container" >
             <div className="container-filter">
 
-                <div className="main-image" ref={ref} style={getImageStyle()} >
-                    <img src={url} ></img>
-                </div>
+
+                <ImageF
+                    img={img}
+                    getImageStyle={getImageStyle()}
+                />
+
                 <div className="sidebar-filter">
                     {
                         options.map((option, index) => {
@@ -141,7 +157,7 @@ const FilterImage = React.forwardRef((props, ref) => {
                     handleChange={handleSliderChange}
                 />
                 <br></br>
-                <UploadImage storeURL={storeURL} />
+                <UploadImage img={img} handleChange={handleImageUpload} />
 
 
             </div>
@@ -154,13 +170,11 @@ const MyComponent = () => {
     return (
         <React.Fragment>
             <FilterImage ref={componentRef} />
-            <button onClick={() => exportComponentAsJPEG(componentRef)}>
+            <button onClick={() => exportComponentAsJPEG(componentRef)} className="btn-download">
                 Export As JPEG
         </button>
-            <button onClick={() => exportComponentAsPDF(componentRef)}>
-                Export As PDF
-        </button>
-            <button onClick={() => exportComponentAsPNG(componentRef)}>
+
+            <button onClick={() => exportComponentAsPNG(componentRef)} className="btn-download">
                 Export As PNG
         </button>
         </React.Fragment>);

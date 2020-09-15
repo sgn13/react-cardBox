@@ -8,25 +8,25 @@ class Home extends Component {
     render() {
         return (
             <div>
-                <div class="banner">
-                    <div class="container">
+                <div className="banner">
+                    <div className="container">
                         <h1>Card Box</h1>
                         <p>
                             Easily customize greeting cards for every event. Print or send as eCard for free!
                         </p>
-                        <NavLink to="/design" class="scroll-link btn1 btn1-white">Design your card</NavLink>
+                        <NavLink to="/design" className="scroll-link btn1 btn1-white">Design your card</NavLink>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="business">
+                <div className="card">
+                    <div className="business">
                         <img src={require("../image/business-card.jpg")} alt="" />
                         <h4>business-card</h4>
                     </div>
-                    <div class="bannner">
+                    <div className="bannner">
                         <img src={require("../image/banner.jpg")} alt="" />
                         <h4>Banner-design</h4>
                     </div>
-                    <div class="filter">
+                    <div className="filter">
                         <NavLink to="/filter" className="scroll-link">
                             <img src={require("../image/filter.jpg")} alt="" />
                         </NavLink>
