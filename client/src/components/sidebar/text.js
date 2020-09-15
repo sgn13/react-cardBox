@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import ColorPicker from './color-picker/colorpicker'
 import '../../css/text.css'
+import ReactToPrint from 'react-to-print';
+import CanComponent from '../canva/canva_component'
+import Example from '../canva/print'
+
 
 class Text extends Component {
 
     state = {
         color: '',
-        // colorCompany: '',
         font: ''
 
     }
@@ -16,7 +19,6 @@ class Text extends Component {
         var pick = e.target.id;
         this.setState({
             color: pick,
-            // colorCompany: pick
         })
         this.props.selected(pick);
         // console.log(pick)
@@ -28,6 +30,15 @@ class Text extends Component {
             font: font
         })
         this.props.selectFont(font)
+    }
+    changeTextColor = (e) => {
+        // e.preventDefault();
+        this.setState({
+            color: e.hex
+        })
+        this.props.selected(e.hex);
+        // console.log(e.hex)
+
     }
 
     render() {
@@ -65,13 +76,28 @@ class Text extends Component {
 
                 </select>
                 <input type="range" min="0px" max="100px" style={{ marginTop: 'auto' }} onChange={this.props.fontsize}></input>
-                <input className="fileChoose" type="file" style={{ marginTop: "auto" }}></input>
-                <ColorPicker />
+                <input className="fileChoose" type="file" style={{ marginTop: "auto" }} onChange={this.props.imageUpload}></input>
+                <ColorPicker getTextColor={this.changeTextColor} />
+                {/* <Example /> */}
+                {/* <CanComponent /> */}
 
 
                 {/* <Canva /> */}
             </div>);
     }
 }
+// class Example extends React.Component {
+//     render() {
+//         return (
+//             <div>
+//                 <ReactToPrint
+//                     trigger={() => <a href="#">Print this out!</a>}
+//                     content={() => this.componentRef}
+//                 />
+//                 <Text ref={el => (this.componentRef = el)} />
+//             </div>
+//         );
+//     }
+// }
 
 export default Text;

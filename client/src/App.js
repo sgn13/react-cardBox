@@ -14,6 +14,7 @@ import Body from './components/header/body'
 import { Provider } from 'react-redux';
 import store from './components/flux/store';
 import { loadUser } from './components/flux/action/authAction';
+import FilterImage from './components/filter/filter_image';
 
 class App extends Component {
   componentDidMount() {
@@ -27,6 +28,7 @@ class App extends Component {
           <Nav />
           <Route path='/gallery' component={Gallery} />
           <Route path='/help' component={Help} />
+          <Route path='/filter' component={FilterImage} />
           <Route path='/board' component={Board} />
           <Route path='/design' component={Body} />
           <Route path='/' exact component={Home} />

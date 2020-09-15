@@ -1,19 +1,25 @@
 import React, { useState } from 'react';
 
 import { SketchPicker } from 'react-color';
-function ColorPicker() {
-    const [color, setcolor] = useState('red')
+function ColorPicker(props) {
+    const [color, setcolor] = useState()
     const [showPicker, setShowPicker] = useState(false)
 
 
     // console.log(showPicker)
+    const handleChangeComplete = (color) => {
+        setcolor({ color: color.hex });
+        props.getTextColor(color);
+
+    };
+
     return (
         <div >
             <button onClick={() => setShowPicker(showPicker => !showPicker)} className="toggleColor">{showPicker ? "Close color picker" : "Pick color"}</button>
             {showPicker ? <div >
                 <SketchPicker
                     color={color}
-                    onChangeComplete={(color) => setcolor(color.hex)}
+                    onChangeComplete={handleChangeComplete}
                 />
             </div>
 

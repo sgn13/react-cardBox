@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { Link, NavLink } from "react-router-dom";
 import Canva from './canva/canva'
 import CanvaNew from './canva/canvaNew'
-import BannerCanva from './canva/banner-canva'
-import { Rectangle, Circle, Ellipse, Line, Polyline, CornerBox, Triangle } from 'react-shapes';
 import Text from './sidebar/text'
 import { Button } from 'react-bootstrap';
 import Image from '../image/businessCard/business_background.jpg'
 import Shape from './sidebar/shape'
 import { SketchPicker } from 'react-color';
+import BannerCanva from './canva/banner-canva';
+import { storage } from '../components/firebase/firebaseConfig'
+
 
 
 
@@ -31,6 +32,7 @@ class Sidebar extends Component {
         text1: '',
         text2: '',
         text3: '',
+        url: '',
         text4: '',
         text5: '',
         text6: '',
@@ -41,6 +43,25 @@ class Sidebar extends Component {
 
 
 
+    }
+    handleImageUpload = (e) => {
+        if (e.target.files[0]) {
+            const image = (e.target.files[0]);
+            const uploadTask = storage.ref(`images/${image.name}`).put(image);
+            uploadTask.on("state_changed",
+                (snapshot) => {
+                    console.log(snapshot);
+                },
+                (error) => {
+                    console.log(error)
+                },
+                () => {
+                    storage.ref('images').child(image.name).getDownloadURL().then(url => {
+                        this.setState({ url: url });
+                    })
+                }
+            )
+        }
     }
     handleChangeComplete = (color) => {
         this.setState({ color: color.hex });
@@ -137,7 +158,7 @@ class Sidebar extends Component {
 
     render() {
         const { disabled } = this.state;
-        console.log(this.state.backgroundImage)
+        // console.log(this.state.backgroundImage)
 
         function openCity(cityName) {
             var i, tabcontent, tablinks;
@@ -276,7 +297,23 @@ class Sidebar extends Component {
 
                     </div>
                 </div>
-
+                {/* <BannerCanva
+                    display={this.state.url}
+                    changeFont={this.state.font}
+                    changeFsize={this.state.fontsize}
+                    changeBackImage={this.state.changeBackImage}
+                    cBold={this.state.bold}
+                    changeBack={this.state.color}
+                    selectedColor={this.state.selectedColor}
+                    company={this.state.company}
+                    number={this.state.phone}
+                    address={this.state.address}
+                    email={this.state.email}
+                    text1={this.state.text1}
+                    text2={this.state.text2}
+                    text3={this.state.text3}
+                    text4={this.state.text4}
+                    text5={this.state.text5} /> */}
                 {/* <Canva changeFont={this.state.font} changeFsize={this.state.fontsize} changeBackImage={this.state.changeBackImage} cBold={this.state.bold} changeBack={this.state.color} company={this.state.company} number={this.state.phone} address={this.state.address} email={this.state.email} text1={this.state.text1} text2={this.state.text2} text3={this.state.text3} text4={this.state.text4} text5={this.state.text5} /> */}
                 <CanvaNew
                     changeFont={this.state.font}
@@ -295,14 +332,16 @@ class Sidebar extends Component {
                     text4={this.state.text4}
                     text5={this.state.text5} />
 
-                {/* <CanvaNew /> */}
-                {/* <BannerCanva /> */}
+
                 <Text
                     selected={this.changeSelectedItem}
+                    imageUpload={this.handleImageUpload}
                 />
             </div>
         );
     }
 }
+
+
 
 export default Sidebar;

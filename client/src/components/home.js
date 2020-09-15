@@ -27,7 +27,9 @@ class Home extends Component {
                         <h4>Banner-design</h4>
                     </div>
                     <div class="filter">
-                        <img src={require("../image/filter.jpg")} alt="" />
+                        <NavLink to="/filter" className="scroll-link">
+                            <img src={require("../image/filter.jpg")} alt="" />
+                        </NavLink>
                         <h4>Filter pictures</h4>
                     </div>
                 </div>

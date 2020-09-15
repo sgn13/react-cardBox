@@ -4,6 +4,8 @@ import Text from '../sidebar/text'
 import Draggable from "react-draggable";
 import Image from '../../image/businessCard/business_background.jpg'
 import ColorPicker from '../sidebar/color-picker/colorpicker';
+import ReactToPrint from 'react-to-print';
+
 class Canva extends Component {
     state = {
         edit: false,
@@ -221,5 +223,7 @@ class Canva extends Component {
         );
     }
 }
+
+
 
 export default Canva;

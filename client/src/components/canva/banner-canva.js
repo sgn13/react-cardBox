@@ -93,7 +93,6 @@ class BannerCanva extends Component {
         this.setState(prevState => ({ disabled: !this.state.disabled }));
 
     render() {
-
         return (
             <div className="canva-board">
                 {/* <Text selected={this.SeletectText} selectFont={this.selectFont} fontsize={this.fontsize} /> */}
@@ -106,7 +105,73 @@ class BannerCanva extends Component {
 
 
 
-                <div className='containers  ' style={{ width: '400px', height: '500px', border: '1px solid black', position: 'absolute', background: 'red', margin: '200px' }}></div>
+                <div className='containers  ' style={{ width: '400px', height: '500px', border: '1px solid black', position: 'absolute', margin: '200px' }}>
+
+                    <Draggable bounds="parent" onDrag={this.handleDrag}  >
+                        <img src={`${this.props.display}`} style={{ width: '40px', height: '50px' }}></img>
+                    </Draggable>
+                    <Draggable bounds="parent" onDrag={this.handleDrag}  >
+                        <div style={{ width: 150, position: 'relative' }}>
+                            <p style={{ fontFamily: this.props.changeFont, color: 'black' }} onDoubleClick={this.emailSelect}>{this.props.number}</p>
+                        </div>
+                    </Draggable>
+                    <Draggable bounds="parent" onDrag={this.handleDrag}  >
+                        <div style={{ width: 150, position: 'relative' }}>
+                            <p style={{ fontFamily: this.props.changeFont, color: 'black' }} onDoubleClick={this.emailSelect}>{this.props.address}</p>
+                        </div>
+                    </Draggable>
+                    {this.state.edit ? <Draggable bounds="parent" onDrag={this.handleDrag}  >
+                        <div style={{ width: 150 }}>
+                            <p style={{ fontFamily: this.props.changeFont, fontFamily: this.state.font, fontsize: this.state.fsize, color: "red" }} onDoubleClick={this.emailSelect}>{this.props.email}</p>
+                        </div>
+                    </Draggable> : <Draggable bounds="parent" onDrag={this.handleDrag}  >
+                            <div style={{ width: 150 }}>
+                                <p style={{ fontFamily: this.props.changeFont, color: 'black', color: this.state.color, fontFamily: this.state.font, }} onDoubleClick={this.emailSelect}>{this.props.email}</p>
+                            </div>
+                        </Draggable>}
+                    {/* 
+                    <Draggable bounds="parent" onDrag={this.handleDrag}  >
+                        <div style={{ width: 150 }}>
+                            <p style={{ fontFamily: this.props.changeFont, color: 'black' }} onDoubleClick={this.emailSelect}>{this.props.email}</p>
+                        </div>
+                    </Draggable> */}
+                    {this.state.edit ? <Draggable bounds="parent" onDrag={this.handleDrag}  >
+                        <div style={{ width: 150, position: 'relative' }}>
+                            <p style={{ fontFamily: this.props.changeFont, color: this.state.color }} onDoubleClick={this.emailSelect}>{this.props.text1}</p>
+                        </div>
+                    </Draggable> : <Draggable bounds="parent" onDrag={this.handleDrag}  >
+                            <div style={{ width: 150, position: 'relative' }}>
+                                <p style={{ fontFamily: this.props.changeFont, color: 'black' }} onDoubleClick={this.emailSelect}>{this.props.text1}</p>
+                            </div>
+                        </Draggable>}
+                    <Draggable bounds="parent" onDrag={this.handleDrag}  >
+                        <div style={{ width: 150, position: 'relative' }}>
+                            <p style={{ fontFamily: this.props.changeFont, color: 'black' }} onDoubleClick={this.emailSelect}>{this.props.text2}</p>
+                        </div>
+                    </Draggable>
+                    <Draggable bounds="parent" onDrag={this.handleDrag}  >
+                        <div style={{ width: 150, position: 'relative' }}>
+                            <p style={{ fontFamily: this.props.changeFont, color: 'black' }} onDoubleClick={this.emailSelect}>{this.props.text3}</p>
+                        </div>
+                    </Draggable>
+                    <Draggable bounds="parent" onDrag={this.handleDrag}  >
+                        <div style={{ width: 150, position: 'relative' }}>
+                            <p style={{ fontFamily: this.props.changeFont, color: 'black' }} onDoubleClick={this.emailSelect}>{this.props.text4}</p>
+                        </div>
+                    </Draggable>
+                    <Draggable bounds="parent" onDrag={this.handleDrag}  >
+                        <div style={{ width: 150, position: 'relative' }}>
+                            <p style={{ fontFamily: this.props.changeFont, color: 'black' }} onDoubleClick={this.emailSelect}>{this.props.text5}</p>
+                        </div>
+                    </Draggable>
+                    <Draggable bounds="parent" onDrag={this.handleDrag}  >
+                        <div style={{ width: 150, position: 'relative' }}>
+                            <p style={{ fontFamily: this.props.changeFont, color: 'black' }} onDoubleClick={this.emailSelect}>{this.props.text6}</p>
+                        </div>
+                    </Draggable>
+
+                </div>
+
 
 
 
