@@ -24,9 +24,9 @@
 
 }
 .toolbar{
-    width: 250px;
+    width: 10%;
     height: 100%;
-    float: left;
+        float: left;
 }
 
 .fileChoose{

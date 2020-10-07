@@ -108,7 +108,9 @@ class BannerCanva extends Component {
                 <div className='containers  ' style={{ width: '400px', height: '500px', border: '1px solid black', position: 'absolute', margin: '200px' }}>
 
                     <Draggable bounds="parent" onDrag={this.handleDrag}  >
-                        <img src={`${this.props.display}`} style={{ width: '40px', height: '50px' }}></img>
+                        <div>
+                            {this.props.display && <img src={URL.createObjectURL(this.props.display)} style={{ width: '400px', height: '500px' }}></img>}
+                        </div>
                     </Draggable>
                     <Draggable bounds="parent" onDrag={this.handleDrag}  >
                         <div style={{ width: 150, position: 'relative' }}>

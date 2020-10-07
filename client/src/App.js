@@ -15,6 +15,7 @@ import { Provider } from 'react-redux';
 import store from './components/flux/store';
 import { loadUser } from './components/flux/action/authAction';
 import FilterImage from './components/filter/filter_image';
+import BannerCanva from './components/canva/banner-canva';
 
 class App extends Component {
   componentDidMount() {
@@ -31,6 +32,7 @@ class App extends Component {
           <Route path='/filter' component={FilterImage} />
           <Route path='/board' component={Board} />
           <Route path='/design' component={Body} />
+          {/* <Route path='/banner' component={BannerCanva} /> */}
           <Route path='/' exact component={Home} />
 
         </BrowserRouter>

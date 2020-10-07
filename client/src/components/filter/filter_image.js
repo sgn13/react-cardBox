@@ -5,6 +5,7 @@ import ImageF from './imageF'
 import UploadImage from './uploadImg'
 import immm from '../../image/banner.jpg'
 import './filter.css'
+import ReactToPrint from 'react-to-print';
 import { exportComponentAsJPEG, exportComponentAsPDF, exportComponentAsPNG } from "react-component-export-image";
 
 
@@ -90,6 +91,7 @@ const FilterImage = React.forwardRef((props, ref) => {
     const [img, setImg] = useState('')
     const [filter, setFilter] = useState('')
 
+
     const selected = options[selectedOptionIndex]
 
 
@@ -100,6 +102,7 @@ const FilterImage = React.forwardRef((props, ref) => {
     }
 
     function handleSliderChange({ target }) {
+        console.log({ target })
         setOptions(prevOptions => {
             return prevOptions.map((option, index) => {
                 if (index !== selectedOptionIndex) return option
@@ -107,6 +110,8 @@ const FilterImage = React.forwardRef((props, ref) => {
             })
         })
     }
+
+
     function getImageStyle() {
         const filters = options.map(option => {
             return `${option.property}(${option.value}${option.unit})`
@@ -116,6 +121,8 @@ const FilterImage = React.forwardRef((props, ref) => {
         return { filter: filters.join(' ') }
 
     }
+    var imo = document.getElementById('img-download');
+    var btn = document.getElementById('foo');
 
 
 
@@ -123,7 +130,13 @@ const FilterImage = React.forwardRef((props, ref) => {
         setUrl(url)
 
     }
+    console.log(props)
+    console.log(getImageStyle())
 
+    useEffect(() => {
+        getImageStyle()
+
+    }, [])
 
     return (
         <div className="container" >
@@ -131,9 +144,13 @@ const FilterImage = React.forwardRef((props, ref) => {
 
 
                 <ImageF
+                    {...props}
+                    ref={ref}
                     img={img}
                     getImageStyle={getImageStyle()}
+                    id="img-download"
                 />
+
 
                 <div className="sidebar-filter">
                     {
@@ -160,19 +177,21 @@ const FilterImage = React.forwardRef((props, ref) => {
                 <UploadImage img={img} handleChange={handleImageUpload} />
 
 
-            </div>
-        </div>
+            </div >
+        </div >
     )
 })
-const MyComponent = () => {
+
+const MyComponent = (props) => {
     const componentRef = useRef();
 
     return (
         <React.Fragment>
-            <FilterImage ref={componentRef} />
+            <FilterImage {...props} ref={componentRef} />
             <button onClick={() => exportComponentAsJPEG(componentRef)} className="btn-download">
                 Export As JPEG
         </button>
+
 
             <button onClick={() => exportComponentAsPNG(componentRef)} className="btn-download">
                 Export As PNG
@@ -183,3 +202,19 @@ const MyComponent = () => {
 export default MyComponent;
 
 // export default FilterImage
+
+// const Example = () => {
+//     const componentRef = useRef();
+
+//     return (
+//         <div>
+//             <ReactToPrint
+//                 trigger={() => <button className="btn-download"> Download</button>}
+//                 content={() => componentRef.current}
+//             />
+//             <FilterImage ref={componentRef} />
+//         </div>
+//     );
+// };
+
+// export default Example

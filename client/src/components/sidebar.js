@@ -9,13 +9,19 @@ import Shape from './sidebar/shape'
 import { SketchPicker } from 'react-color';
 import BannerCanva from './canva/banner-canva';
 import { storage } from '../components/firebase/firebaseConfig'
+import { v4 as uuidv4 } from 'uuid';
 
 
-
+// import { Wrapper } from 'react-download-svg'
 
 class Sidebar extends Component {
 
     state = {
+        // card: [
+        //     { id: 1, name:}
+
+        // ],
+        list: ['sagun', 'shrestha', 'thimi', '9852213'],
 
         color: '',
         backgroundImage: 'https://www.pexels.com/photo/abstract-ancient-antique-art-235985/',
@@ -39,29 +45,43 @@ class Sidebar extends Component {
         text7: '',
         styles: {},
         addid: 0,
+        item: 'sagun',
+        items: []
 
 
 
 
     }
+    handleChange = (e) => {
+        this.setState({
+            item: e.target.value
+
+        })
+        console.log(e.target.value)
+
+    }
+    handleSubmit = e => {
+        e.preventDefault();
+
+        const newItem = {
+            id: this.state.id,
+            title: this.state.item
+        };
+
+        const updatedItems = [...this.state.items, newItem];
+
+        this.setState({
+            items: updatedItems,
+            item: "",
+            id: uuidv4(),
+        });
+    };
+
     handleImageUpload = (e) => {
-        if (e.target.files[0]) {
-            const image = (e.target.files[0]);
-            const uploadTask = storage.ref(`images/${image.name}`).put(image);
-            uploadTask.on("state_changed",
-                (snapshot) => {
-                    console.log(snapshot);
-                },
-                (error) => {
-                    console.log(error)
-                },
-                () => {
-                    storage.ref('images').child(image.name).getDownloadURL().then(url => {
-                        this.setState({ url: url });
-                    })
-                }
-            )
-        }
+        this.setState({
+            url: e.target.files[0]
+        })
+
     }
     handleChangeComplete = (color) => {
         this.setState({ color: color.hex });
@@ -157,10 +177,7 @@ class Sidebar extends Component {
 
 
     render() {
-        const { disabled } = this.state;
-        // console.log(this.state.backgroundImage)
-
-        function openCity(cityName) {
+        function openTab(tabName) {
             var i, tabcontent, tablinks;
             tabcontent = document.getElementsByClassName("tabcontent");
             for (i = 0; i < tabcontent.length; i++) {
@@ -170,32 +187,64 @@ class Sidebar extends Component {
             for (i = 0; i < tablinks.length; i++) {
                 tablinks[i].className = tablinks[i].className.replace(" active");
             }
-            document.getElementById(cityName).style.display = "block";
+            document.getElementById(tabName).style.display = "block";
             // evt.currentTarget.className += " active";
+
         }
+
+
+        const { color, item, items, font, fontsize, bold, changeBackImage, selectedColor, company, phone, address, email, text1, text2, text3, text4, text5, } = this.state;
         return (
             <div id="darkside">
+
                 <div>
+
+                    {/* sidebar */}
+                    {/* ----------------------------------------- */}
+
                     <div className="sidebar">
-                        <Link className="tablinks" id="defaultOpen" onClick={() => openCity('templates')} to="#">Templates</Link>
-                        <Link className="tablinks" onClick={() => openCity('background')} to="#"> <i className="fa fa-chess-board
-                    " ></i><br />Background</Link>
-                        <Link className="tablinks" onClick={() => openCity('text')} to="#"><i className="fa fa-font" style={{ size: '20px' }}></i><br />  Text</Link>
-                        <Link className="tablinks" onClick={() => openCity('shapes')} to="#"><i className="fas fa-shapes"></i> Shapes</Link>
+                        <Link className="tablinks" id="defaultOpen" onClick={() => openTab('templates')} to="#">Templates</Link>
+                        <Link className="tablinks" onClick={() => openTab('background')} to="#">Background</Link>
+                        <Link className="tablinks" onClick={() => openTab('text')} to="#">  Text</Link>
+                        <Link className="tablinks" onClick={() => openTab('shapes')} to="#">Shapes</Link>
                     </div>
 
-                    <div id="templates" className="tabcontent" style={{ display: "block" }}>
+                    {/* templates */}
+                    {/* ....................................................... */}
+
+                    <div id="templates" className="tabcontent" style={{ display: "none" }}>
                         <Button variant="danger" onClick={this.closeTab} style={{ float: 'right' }}>X</Button>
                         <h3 >Templates</h3>
                         <p>Help me ?</p>
-                        {/* <Template onClick={this.showTesmplate} changeBack={this.state.color} changeBack={this.state.color} company={this.state.company} number={this.state.phone} address={this.state.address} email={this.state.email} /> */}
+                        <form onSubmit={this.handleSubmit}>
+                            <div className="input-group">
 
+                                <input
+                                    type="text"
+                                    className="form-control text-capitalize"
+                                    placeholder="add a todo item"
+                                    value={this.state.item}
+                                    onChange={this.handleChange}
+                                />
+                            </div>
+                            <button
+                                type="submit"
+                            >
+                            </button>
+                        </form>
                     </div>
-                    <div id="background" className="tabcontent" style={{ display: "none" }}>
-                        {/* <button onClick={this.closeTab} style={{ float: 'right' }}>x</button> */}
+
+
+                    {/* background  */}
+                    {/* ----------------------------------------------------------- */}
+
+
+
+                    <div id="background" className="tabcontent" style={{ display: "block" }}>
+
                         <Button variant="danger" onClick={this.closeTab} style={{ float: 'right' }}>X</Button>
                         <h3>Background</h3>
-                        <p>Help me ?</p>
+                        <p>Choose your background</p>
 
                         <div>
                             <select onChange={this.setBackground} id="color-selector">
@@ -229,13 +278,17 @@ class Sidebar extends Component {
                                 onChangeComplete={this.handleChangeComplete}
                                 style={{ width: '100%' }}
                             />
-                            <div>
-                                <div style={{ width: '10rem', height: '7rem', backgroundImage: `url(${Image})  ` }} id="https://www.pexels.com/photo/abstract-ancient-antique-art-235985/" onClick={this.changeBackImage}> </div>
-                            </div>
                         </div>
                     </div>
+
+                    {/* text area */}
+                    {/* ------------------------------------------------------------------ */}
+
+
+
                     <div id="text" className="tabcontent" style={{ display: "none" }}>
-                        <Button variant="danger" onClick={this.closeTab} style={{ float: 'right' }}>X</Button>                    <h3>Text</h3>
+                        <Button variant="danger" onClick={this.closeTab} style={{ float: 'right' }}>X</Button>
+                        <h3>Text</h3>
                         <h3>Select Fonts</h3>
                         <select onChange={this.setFont} id="font-selector">
                             <option value="none">None</option>
@@ -272,11 +325,11 @@ class Sidebar extends Component {
                         <Button variant="warning" className=" mr-sm-1" onClick={this.makeBold} id="bold" value="bold">B</Button>
                         <Button variant="warning" className=" mr-sm-1" onClick={this.makeBold} id="italic" value="bold">I</Button>
                         <Button variant="warning" onClick={this.makeBold} id="underline" value="bold">U</Button>
-                        {/* <button onClick={this.makeBold} id="italic" value="italic">I</button> */}
-                        {/* <button onClick={this.makeBold} id="underline" value="underline">U</button> */}
+
 
                         <div id="information" >
                             <span>Company name</span>
+
 
                             <input type='text' placeholder="Company name" onChange={this.changeData} id="company"></input><br />
                             <span>Phone</span><br />
@@ -292,10 +345,19 @@ class Sidebar extends Component {
                             <br></br>
                         </div>
                     </div>
+
+                    {/* Shapes  */}
+                    {/* --------------------------------------------------------------------------------------- */}
+
+
+
                     <div id="shapes" className="tabcontent" style={{ display: "none" }}>
                         <Shape />
 
                     </div>
+
+
+
                 </div>
                 {/* <BannerCanva
                     display={this.state.url}
@@ -316,28 +378,31 @@ class Sidebar extends Component {
                     text5={this.state.text5} /> */}
                 {/* <Canva changeFont={this.state.font} changeFsize={this.state.fontsize} changeBackImage={this.state.changeBackImage} cBold={this.state.bold} changeBack={this.state.color} company={this.state.company} number={this.state.phone} address={this.state.address} email={this.state.email} text1={this.state.text1} text2={this.state.text2} text3={this.state.text3} text4={this.state.text4} text5={this.state.text5} /> */}
                 <CanvaNew
-                    changeFont={this.state.font}
-                    changeFsize={this.state.fontsize}
-                    changeBackImage={this.state.changeBackImage}
-                    cBold={this.state.bold}
-                    changeBack={this.state.color}
-                    selectedColor={this.state.selectedColor}
-                    company={this.state.company}
-                    number={this.state.phone}
-                    address={this.state.address}
-                    email={this.state.email}
-                    text1={this.state.text1}
-                    text2={this.state.text2}
-                    text3={this.state.text3}
-                    text4={this.state.text4}
-                    text5={this.state.text5} />
+                    changeFont={font}
+                    changeFsize={fontsize}
+                    changeBackImage={changeBackImage}
+                    cBold={bold}
+                    changeBack={color}
+                    selectedColor={selectedColor}
+                    company={company}
+                    number={phone}
+                    address={address}
+                    email={email}
+                    text1={text1}
+                    text2={text2}
+                    text3={text3}
+                    text4={text4}
+                    text5={text5}
+                    hello="hello huy"
+                    item={item}
+                    items={items} />
 
 
                 <Text
                     selected={this.changeSelectedItem}
                     imageUpload={this.handleImageUpload}
                 />
-            </div>
+            </div >
         );
     }
 }

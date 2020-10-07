@@ -19,11 +19,15 @@ class Home extends Component {
                 </div>
                 <div className="card">
                     <div className="business">
-                        <img src={require("../image/business-card.jpg")} alt="" />
+                        <NavLink to="/design" className="scroll-link">
+                            <img src={require("../image/business-card.jpg")} alt="" />
+                        </NavLink>
                         <h4>business-card</h4>
                     </div>
                     <div className="bannner">
-                        <img src={require("../image/banner.jpg")} alt="" />
+                        <NavLink to="/banner" className="scroll-link">
+                            <img src={require("../image/banner.jpg")} alt="" />
+                        </NavLink >
                         <h4>Banner-design</h4>
                     </div>
                     <div className="filter">

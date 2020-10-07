@@ -10,9 +10,6 @@ function SidebarItem({ name, active, handleClick }) {
                 onClick={handleClick}
                 className={`sidebar-item ${active ? 'active' : ''}`}>{name}
             </button>
-
-
-
         </div>
     )
 }

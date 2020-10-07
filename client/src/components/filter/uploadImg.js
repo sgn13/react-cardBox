@@ -20,7 +20,8 @@ class UploadImage extends Component {
                         label="Choose image"
                         custom
                         onChange={this.props.handleChange}
-
+                    // name="img"
+                    // defaultValue={this.state.img}
 
                     />
                 </Form>
