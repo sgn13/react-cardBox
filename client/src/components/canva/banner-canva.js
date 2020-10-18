@@ -2,24 +2,19 @@ import React, { Component } from 'react';
 import Template from '../templates/template';
 import Text from '../sidebar/text'
 import Draggable from "react-draggable";
-import Image from '../../image/businessCard/business_background.jpg'
-import ColorPicker from '../sidebar/color-picker/colorpicker';
-import ReactToPrint from 'react-to-print';
-
-class Canva extends Component {
+import { Button } from 'react-bootstrap';
+class BannerCanva extends Component {
     state = {
         edit: false,
-        editCompany: false,
+
         x: '',
         y: '',
         width: '',
         height: '',
         style: '',
         fsize: '30px',
-        color: 'black',
-        colorCompany: 'black',
+        color: '',
         font: '',
-        shape: 'false',
         activeDrags: 0,
         deltaPosition: {
             x: 0, y: 0
@@ -82,16 +77,10 @@ class Canva extends Component {
         })
 
     }
-    companySelect = () => {
-        this.setState({
-            editCompany: !this.state.editCompany
-        })
-    }
     SeletectText = (e) => {
         console.log(e);
         this.setState({
-            color: e,
-            colorCompany: e
+            color: e
         })
     }
     selectFont = (e) => {
@@ -103,44 +92,26 @@ class Canva extends Component {
     toggleDraggable = () =>
         this.setState(prevState => ({ disabled: !this.state.disabled }));
 
-    changeShape = () => {
-        this.setState({
-            shape: !this.state.shape
-        })
-        console.log(this.state.shape)
-
-    }
-
     render() {
-        // const style = {
-
-        // }
-        // const { disabled } = this.state;
         return (
-            <div className="canva-board" >
+            <div className="canva-board">
+                {/* <Text selected={this.SeletectText} selectFont={this.selectFont} fontsize={this.fontsize} /> */}
 
 
 
                 <div>x: {this.state.deltaPosition.x.toFixed(0)}, y: {this.state.deltaPosition.y.toFixed(0)}</div>
 
-                {this.state.shape ? (<div className="container" style={{ width: '500px', backgroundColor: this.props.changeBack, backgroundImage: "url(" + this.props.changeBackImage + ")", height: '250px', border: '1px solid black', position: 'absolute', margin: '200px' }}>
 
-                    {/* company  */}
-                    {/* ................ */}
-                    {this.state.editCompany ? <Draggable bounds="parent" onDrag={this.handleDrag}  >
-                        <div style={{ width: 250, position: 'relative' }}>
-                            <p style={{ fontFamily: this.props.changeFont, fontSize: this.props.changeFsize, color: this.state.colorCompany, }} onDoubleClick={this.companySelect}>{this.props.company}</p>
+
+
+
+                <div className='containers  ' style={{ width: '400px', height: '500px', border: '1px solid black', position: 'absolute', margin: '200px' }}>
+
+                    <Draggable bounds="parent" onDrag={this.handleDrag}  >
+                        <div>
+                            {this.props.display && <img src={URL.createObjectURL(this.props.display)} style={{ width: '400px', height: '500px' }}></img>}
                         </div>
-                    </Draggable> :
-                        <Draggable bounds="parent" onDrag={this.handleDrag}  >
-                            <div style={{ width: 250, position: 'relative' }}>
-                                <p style={{ fontFamily: this.props.changeFont, fontSize: this.props.changeFsize, color: 'black', }} onDoubleClick={this.companySelect}>{this.props.company}</p>
-                            </div>
-                        </Draggable>}
-
-                    {/* company  */}
-                    {/* ................ */}
-
+                    </Draggable>
                     <Draggable bounds="parent" onDrag={this.handleDrag}  >
                         <div style={{ width: 150, position: 'relative' }}>
                             <p style={{ fontFamily: this.props.changeFont, color: 'black' }} onDoubleClick={this.emailSelect}>{this.props.number}</p>
@@ -201,21 +172,8 @@ class Canva extends Component {
                         </div>
                     </Draggable>
 
-                </div>) : (<div className='containers  ' style={{ width: '400px', height: '500px', border: '1px solid black', position: 'absolute', margin: '200px' }}></div>)
-
-                }
-                {/* {
-                    this.state.shape ? (<div className='containers  ' style={{ width: '400px', height: '500px', border: '1px solid black', position: 'absolute', margin: '200px' }}></div>
-                    ) : null
-                } */}
-
-                <div>
-                    <div onClick={this.changeShape} style={{ height: ".5in", width: '1in', border: '1px solid', fontsize: '1px' }}></div>
-                    <div onClick={this.changeShape} style={{ height: "1in", width: '0.5in', border: '1px solid', fontsize: '1px' }}></div>
-
                 </div>
-                {/* <Text selected={this.SeletectText} selectFont={this.selectFont} fontsize={this.fontsize} /> */}
-                {/* <ColorPicker /> */}
+
 
 
 
@@ -224,6 +182,4 @@ class Canva extends Component {
     }
 }
 
-
-
-export default Canva;
+export default BannerCanva;
