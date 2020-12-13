@@ -1,12 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Component } from 'react';
 import { exportComponentAsJPEG, exportComponentAsPNG } from "react-component-export-image";
 import ReactToPrint from 'react-to-print';
-
-
-
+import axios from 'axios';
 import Draggable from "react-draggable";
 
-const CanvaNew = React.forwardRef((props, ref) => {
+
+    const CanvaNew = React.forwardRef((props, ref) => {
     const [select, setSelect] = useState(true)
     const [company, setCompany] = useState(props)
     // console.log(company)
@@ -35,6 +34,8 @@ const CanvaNew = React.forwardRef((props, ref) => {
     useEffect(() => {
         setEmail(props);
     }, [props]);
+
+    
     const myCan = document.getElementById('can');
     const download = document.getElementById('down');
     const downLoads = () => {
@@ -43,7 +44,7 @@ const CanvaNew = React.forwardRef((props, ref) => {
         }
     }
 
-
+  
 
     return (
         <div className="canva-board" >
@@ -150,8 +151,24 @@ const MyComponent = (props) => {
             <button onClick={() => exportComponentAsPNG(componentRef)} className="btn-download">
                 Export As PNG
         </button>
+        <button onClick={() =>{
+                 const config = {
+                    headers: {
+                        'content-type': 'image/png'
+                    }
+                };
+
+                axios.post("/api/img",componentRef,config)
+                .then((response) => {
+                alert("The file is successfully uploaded");
+                }).catch((error) => {
+        });}} > 
+                Save
+        </button>
         </React.Fragment>);
 }
+
+
 
 // const Example = (props) => {
 //     const componentRef = useRef();

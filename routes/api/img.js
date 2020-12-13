@@ -32,7 +32,7 @@ router.post('/',upload.single('image'),function(req, res, next) {
       res.status(500);
       return next(err);
     }
-    res.json({ fileUrl: 'http://localhost:5000/uploads/' + req.file.filename });
+    res.json({ fileUrl: 'http://localhost:5000/public/uploads/' + req.file.filename });
   })
 
   router.get('/',(req,res)=>{
@@ -48,9 +48,11 @@ router.post('/',upload.single('image'),function(req, res, next) {
       if (files.length === 0){
         return res.json({msg:"No images uploaded"});
       }
+      
       //return array of all filenames in upload directory
       return res.json({files})
     })
+  
 
   })
 

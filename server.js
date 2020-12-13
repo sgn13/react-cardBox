@@ -13,6 +13,7 @@ app.use(express.static('uploads'));
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false })); 
 app.use(bodyParser.json()) ;
+app.use(express.static('public/uploads'));
   
 //DB Config
 const db = config.get('mongoURI');
