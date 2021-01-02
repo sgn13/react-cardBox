@@ -124,6 +124,13 @@ p {
   color: var(--clr-grey-5);
   
 }
+.links-container{
+  display: none;
+}
+.social button{
+  background-color: black;
+  margin-right: 10px;
+}
 @media screen and (min-width: 800px) {
   h1 {
     font-size: 3rem;

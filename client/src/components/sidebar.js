@@ -45,11 +45,16 @@ class Sidebar extends Component {
         text7: '',
         styles: {},
         addid: 0,
-        item: 'sagun',
+        imageSize: 30,
         items: []
 
+    }
+    handleFont = (e) => {
+        this.setState({
+            imageSize: e.target.value
 
-
+        })
+        console.log(this.state.imageSize)
 
     }
     handleChange = (e) => {
@@ -193,7 +198,7 @@ class Sidebar extends Component {
         }
 
 
-        const { color, item, items, font, fontsize, bold, changeBackImage, selectedColor, company, phone, address, email, text1, text2, text3, text4, text5, } = this.state;
+        const { color, item, items, font, fontsize, bold, changeBackImage, selectedColor, company, phone, address, email, text1, text2, text3, text4, text5, imageSize } = this.state;
         return (
             <div id="darkside">
 
@@ -215,23 +220,7 @@ class Sidebar extends Component {
                     <div id="templates" className="tabcontent" style={{ display: "none" }}>
                         <Button variant="danger" onClick={this.closeTab} style={{ float: 'right' }}>X</Button>
                         <h3 >Templates</h3>
-                        <p>Help me ?</p>
-                        <form onSubmit={this.handleSubmit}>
-                            <div className="input-group">
 
-                                <input
-                                    type="text"
-                                    className="form-control text-capitalize"
-                                    placeholder="add a todo item"
-                                    value={this.state.item}
-                                    onChange={this.handleChange}
-                                />
-                            </div>
-                            <button
-                                type="submit"
-                            >
-                            </button>
-                        </form>
                     </div>
 
 
@@ -320,6 +309,7 @@ class Sidebar extends Component {
                             <option value="20px">20</option>
                             <option value="24px">24</option>
                             <option value="30px">30</option>
+                            <option value="60px">60</option>
                         </select>
 
                         <Button variant="warning" className=" mr-sm-1" onClick={this.makeBold} id="bold" value="bold">B</Button>
@@ -395,10 +385,12 @@ class Sidebar extends Component {
                     text5={text5}
                     hello="hello huy"
                     item={item}
-                    items={items} />
+                    items={items}
+                    imageSize={imageSize} />
 
 
                 <Text
+                    fontsize={this.handleFont}
                     selected={this.changeSelectedItem}
                     imageUpload={this.handleImageUpload}
                 />

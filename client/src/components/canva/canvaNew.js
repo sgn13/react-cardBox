@@ -15,13 +15,15 @@ const CanvaNew = React.forwardRef((props, ref) => {
     const [img, setImg] = useState('')
     const [backg, setBackg] = useState(props.backImage)
 
+
+
+
     const textSelect = () => {
         setSelect(!select)
 
     }
-    console.log(props)
     const handleImageUpload = (e) => {
-        console.log(e.target.files[0])
+        // console.log(e.target.files[0])
         setImg(e.target.files[0])
     }
 
@@ -35,13 +37,27 @@ const CanvaNew = React.forwardRef((props, ref) => {
     useEffect(() => {
         setEmail(props);
     }, [props]);
-    const myCan = document.getElementById('can');
-    const download = document.getElementById('down');
-    const downLoads = () => {
-        if (window.navigator.msSaveBlob) {
-            window.navigator.msSaveBlob(myCan.msToBlob(), "canva.png")
-        }
-    }
+    // const myCan = document.getElementById('can');
+    // const download = document.getElementById('down');
+    // const downLoads = () => {
+    //     if (window.navigator.msSaveBlob) {
+    //         window.navigator.msSaveBlob(myCan.msToBlob(), "canva.png")
+    //     }
+    // }
+
+    const clickText = document.querySelectorAll('p');
+    clickText.forEach(item => {
+        item.addEventListener('click', event => {
+            const color = props.selectedColor;
+            console.log(color);
+
+
+            event.target.style.color = color
+            // console.log(color);
+            console.log(event.target);
+
+        })
+    })
 
 
 
@@ -67,37 +83,39 @@ const CanvaNew = React.forwardRef((props, ref) => {
 
 
                     <div style={{ width: 250, position: 'relative' }}>
-                        {img && <img src={URL.createObjectURL(img)} style={{ width: '80px', height: '100px' }}></img>}
+                        {img && <img src={URL.createObjectURL(img)} style={{ width: props.imageSize + 'px' }}></img>}
                     </div>
 
                 </Draggable>
-                {/* {select ? */}
                 <Draggable bounds="parent"  >
                     <div style={{ width: 250, position: 'relative' }}>
+                        {/* <div>
+                            <h1 style={{ fontSize: props.imageSize + 'px' }}>hello</h1>
 
-                        <p style={{ fontFamily: props.changeFont, color: company.selectedColor, }} onClick={textSelect} >{props.company}   </p>
+                        </div> */}
+                        <p style={{ fontFamily: props.changeFont, fontSize: props.changeFsize }} onClick={textSelect} >{props.company}   </p>
                     </div>
                 </Draggable>
-                {/* : <p style={{ opacity: 0.5 }} onClick={textSelect}>{props.company}</p>} */}
 
 
                 <Draggable bounds="parent" grid={[100, 100]}  >
                     <div style={{ width: 150, position: 'relative' }}>
-                        <p style={{ fontFamily: props.changeFont, fontSize: props.changeFsize, color: number.selectedColor }}  >{props.number}</p>
+                        <p style={{ fontFamily: props.changeFont, fontSize: props.changeFsize }}  >{props.number}</p>
                     </div>
                 </Draggable>
 
                 <Draggable bounds="parent"  >
                     <div style={{ width: 150, position: 'relative' }}>
-                        <p style={{ fontFamily: props.changeFont, color: 'black' }} >{props.address}</p>
+                        <p style={{ fontFamily: props.changeFont, color: 'black', fontSize: props.changeFsize }} >{props.address}</p>
                     </div>
                 </Draggable>
 
                 <Draggable bounds="parent"  >
                     <div style={{ width: 150 }}>
-                        <p style={{ fontFamily: props.changeFont, color: 'black', }} >{props.email}</p>
+                        <p style={{ fontFamily: props.changeFont, color: 'black', fontSize: props.changeFsize }} >{props.email}</p>
                     </div>
                 </Draggable>
+
 
                 <Draggable bounds="parent"  >
                     <div style={{ width: 150, position: 'relative' }}>
@@ -153,22 +171,7 @@ const MyComponent = (props) => {
         </React.Fragment>);
 }
 
-// const Example = (props) => {
-//     const componentRef = useRef();
 
-//     return (
-//         <div>
-//             <ReactToPrint
-//                 trigger={() => <button className="btn-download"> Download</button>}
-//                 content={() => componentRef.current}
-//             />
-//             <CanvaNew {...props} ref={componentRef} />
-//         </div>
-//     );
-// };
-
-// export default Example
-// export default CanvaNew;
 
 
 

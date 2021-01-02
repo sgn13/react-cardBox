@@ -16,6 +16,8 @@ import store from './components/flux/store';
 import { loadUser } from './components/flux/action/authAction';
 import FilterImage from './components/filter/filter_image';
 import BannerCanva from './components/canva/banner-canva';
+import ReactUploadImage from './components/canva/UploadImage';
+import ImageContainer from './components/canva/SavedImage';
 
 class App extends Component {
   componentDidMount() {
@@ -27,14 +29,15 @@ class App extends Component {
       <Provider store={store}>
         <BrowserRouter>
           <Nav />
-          <Route path='/gallery' component={Gallery} />
+          <Route path='/gallery' component={ImageContainer} />
           <Route path='/help' component={Help} />
           <Route path='/filter' component={FilterImage} />
           <Route path='/board' component={Board} />
           <Route path='/design' component={Body} />
           {/* <Route path='/banner' component={BannerCanva} /> */}
           <Route path='/' exact component={Home} />
-
+          <Route path='/uploadImg' component={ReactUploadImage} />
+          <Route path='/savedImg' component={ImageContainer} />
         </BrowserRouter>
       </Provider>
     );
