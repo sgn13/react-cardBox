@@ -64,7 +64,7 @@ const CanvaNew = React.forwardRef((props, ref) => {
 
     const onDrag = (e, { x, y, node }) => {
         setShowRuler(true);
-        setTargetNode({ left: x, top: y + node.offsetTop });
+        setTargetNode({ left: x, top: y + node.offsetTop, height: node.clientHeight });
     }
     return (
         <div className="canva-board" >
@@ -94,7 +94,7 @@ const CanvaNew = React.forwardRef((props, ref) => {
 
                 </Draggable>
                 <Draggable bounds="parent"  onDrag={onDrag} onStop={() => setShowRuler(false)}>
-                    <div style={{ width: 250, position: 'relative', cursor: 'move' }}>
+                    <div style={{ width: 250, position: 'relative', cursor: showRuler ? 'move' : '' }}>
                         {/* <div>
                             <h1 style={{ fontSize: props.imageSize + 'px' }}>hello</h1>
 
@@ -105,52 +105,52 @@ const CanvaNew = React.forwardRef((props, ref) => {
 
 
                 <Draggable bounds="parent"  onDrag={onDrag} onStop={() => setShowRuler(false)}>
-                    <div style={{ width: 150, position: 'relative' }}>
+                    <div style={{ width: 150, position: 'relative', cursor: showRuler ? 'move' : '' }}>
                         <p style={{ fontFamily: props.changeFont, fontSize: props.changeFsize }}  >{props.number}</p>
                     </div>
                 </Draggable>
 
                 <Draggable bounds="parent"  onDrag={onDrag} onStop={() => setShowRuler(false)}>
-                    <div style={{ width: 150, position: 'relative' }}>
+                    <div style={{ width: 150, position: 'relative', cursor: showRuler ? 'move' : '' }}>
                         <p style={{ fontFamily: props.changeFont, color: 'black', fontSize: props.changeFsize }} >{props.address}</p>
                     </div>
                 </Draggable>
 
                 <Draggable bounds="parent"  onDrag={onDrag} onStop={() => setShowRuler(false)}>
-                    <div style={{ width: 150 }}>
+                    <div style={{ width: 150, cursor: showRuler ? 'move' : '' }}>
                         <p style={{ fontFamily: props.changeFont, color: 'black', fontSize: props.changeFsize }} >{props.email}</p>
                     </div>
                 </Draggable>
 
 
                 <Draggable bounds="parent"  onDrag={onDrag} onStop={() => setShowRuler(false)}>
-                    <div style={{ width: 150, position: 'relative' }}>
+                    <div style={{ width: 150, position: 'relative', cursor: showRuler ? 'move' : '' }}>
                         <p style={{ fontFamily: props.changeFont, color: 'black' }} >{props.text1}</p>
                     </div>
                 </Draggable>
 
                 <Draggable bounds="parent"  onDrag={onDrag} onStop={() => setShowRuler(false)}>
-                    <div style={{ width: 150, position: 'relative' }}>
+                    <div style={{ width: 150, position: 'relative', cursor: showRuler ? 'move' : '' }}>
                         <p style={{ fontFamily: props.changeFont, color: 'black' }} >{props.text2}</p>
                     </div>
                 </Draggable>
                 <Draggable bounds="parent"  onDrag={onDrag} onStop={() => setShowRuler(false)}>
-                    <div style={{ width: 150, position: 'relative' }}>
+                    <div style={{ width: 150, position: 'relative', cursor: showRuler ? 'move' : '' }}>
                         <p style={{ fontFamily: props.changeFont, color: 'black' }} >{props.text3}</p>
                     </div>
                 </Draggable>
                 <Draggable bounds="parent"  onDrag={onDrag} onStop={() => setShowRuler(false)}>
-                    <div style={{ width: 150, position: 'relative' }}>
+                    <div style={{ width: 150, position: 'relative', cursor: showRuler ? 'move' : '' }}>
                         <p style={{ fontFamily: props.changeFont, color: 'black' }} >{props.text4}</p>
                     </div>
                 </Draggable>
                 <Draggable bounds="parent"  onDrag={onDrag} onStop={() => setShowRuler(false)}>
-                    <div style={{ width: 150, position: 'relative' }}>
+                    <div style={{ width: 150, position: 'relative', cursor: showRuler ? 'move' : '' }}>
                         <p style={{ fontFamily: props.changeFont, color: 'black' }} >{props.text5}</p>
                     </div>
                 </Draggable>
                 <Draggable bounds="parent"  onDrag={onDrag} onStop={() => setShowRuler(false)}>
-                    <div style={{ width: 150, position: 'relative' }}>
+                    <div style={{ width: 150, position: 'relative', cursor: showRuler ? 'move' : '' }}>
                         <p style={{ fontFamily: props.changeFont, color: 'black' }} >{props.text6}</p>
                     </div>
                 </Draggable>

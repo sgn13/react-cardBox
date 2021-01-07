@@ -32,9 +32,7 @@ export class Line extends PureComponent {
       top             : `${y0}px`,
       left            : `${x0}px`,
       width           : `${length}px`,
-      zIndex          : Number.isFinite(this.props.zIndex)
-                          ? String(this.props.zIndex)
-                          : '0',
+      zIndex          : '0',
       transform       : `rotate(${angle}deg)`,
       transformOrigin : '0 0',
     };

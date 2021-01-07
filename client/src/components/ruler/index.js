@@ -1,6 +1,8 @@
-import React, { useEffect, useState, useRef, PureComponent } from 'react';
-import {Line} from "../line";
+import React, { useEffect, useState } from 'react';
 
+import { Line } from '../line';
+
+const FRAME_ID   = 'can';
 const RULER_LINE = {
   TOP:    'TOP',
   BOTTOM: 'BOTTOM',
@@ -11,14 +13,14 @@ export const Ruler = ({ node }) => {
   const [frame, setFrame] = useState();
 
   useEffect(() => {
-    const element = document.getElementById('can');
+    const element = document.getElementById(FRAME_ID);
     if (element) {
       const { left, top, height, width } = element.getBoundingClientRect();
-      setFrame({ left, top, height, width})
+      setFrame({ left, top, height, width })
     }
   }, []);
 
-  const getCoordinate = (position) => {
+  const getCoordinates = (position) => {
     switch (position) {
       case RULER_LINE.TOP: {
         return {
@@ -32,8 +34,8 @@ export const Ruler = ({ node }) => {
         return {
           x0: frame.left,
           x1: frame.left + frame.width,
-          y0: frame.top + node.top + window.pageYOffset + 20,
-          y1: frame.top + node.top + window.pageYOffset + 20,
+          y0: frame.top + node.top + node.height + window.pageYOffset,
+          y1: frame.top + node.top + node.height + window.pageYOffset,
         };
       }
       case RULER_LINE.LEFT: {
@@ -52,9 +54,9 @@ export const Ruler = ({ node }) => {
     <div>
       {!!frame && !!node && (
         <>
-          <Line {...getCoordinate(RULER_LINE.TOP)} />
-          <Line {...getCoordinate(RULER_LINE.BOTTOM)} />
-          <Line {...getCoordinate(RULER_LINE.LEFT)} />
+          <Line {...getCoordinates(RULER_LINE.TOP)} />
+          <Line {...getCoordinates(RULER_LINE.BOTTOM)} />
+          <Line {...getCoordinates(RULER_LINE.LEFT)} />
         </>
       )}
     </div>
