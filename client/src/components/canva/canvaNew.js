@@ -85,11 +85,32 @@ const CanvaNew = React.forwardRef((props, ref) => {
                     }
                 </div>
 
-                <Draggable bounds="parent" >
+                <Draggable bounds="parent"  onDrag={onDrag} onStop={() => setShowRuler(false)}>
 
 
-                    <div style={{ width: 250, position: 'relative' }}>
-                        {img && <img src={URL.createObjectURL(img)} style={{ width: props.imageSize + 'px' }}></img>}
+                    <div style={{ width: props.imageSize, position: 'relative', cursor: showRuler ? 'move' : '' }}>
+                        {img && showRuler  && (
+                          <div
+                            style={{
+                                height: props.imageSize + 'px',
+                                width:  props.imageSize + 'px',
+                                border: '1px solid',
+                                opacity: '0.2',
+                                background: 'gray'
+                            }}
+                          />
+                        )}
+                        {img && !showRuler && (
+                          <div
+                            style={{
+                                height: props.imageSize + 'px',
+                                width:  props.imageSize + 'px',
+                                backgroundSize: 'cover',
+                                backgroundImage: `url(${URL.createObjectURL(img)})`
+                            }}
+                          />
+                        )}
+                        {/*{img && <img src={URL.createObjectURL(img)} style={{ width: props.imageSize + 'px', userDrag: 'none'  }}></img>}*/}
                     </div>
 
                 </Draggable>
