@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { exportComponentAsJPEG, exportComponentAsPNG } from "react-component-export-image";
 import ReactToPrint from 'react-to-print';
 
-
+import { Ruler } from "../ruler";
 
 import Draggable from "react-draggable";
 
@@ -59,10 +59,16 @@ const CanvaNew = React.forwardRef((props, ref) => {
         })
     })
 
+    const [targetNode, setTargetNode] = useState();
+    const [showRuler, setShowRuler]   = useState(false);
 
-
+    const onDrag = (e, { x, y, node }) => {
+        setShowRuler(true);
+        setTargetNode({ left: x, top: y + node.offsetTop });
+    }
     return (
         <div className="canva-board" >
+            {showRuler && <Ruler node={targetNode}/>}
             <input type="file" onChange={handleImageUpload}></input>
 
             <div ref={ref} id="can" style={{ width: '650px', backgroundColor: props.changeBack, height: '350px', border: '1px solid black', position: 'absolute', margin: '200px' }}>
@@ -87,8 +93,8 @@ const CanvaNew = React.forwardRef((props, ref) => {
                     </div>
 
                 </Draggable>
-                <Draggable bounds="parent"  >
-                    <div style={{ width: 250, position: 'relative' }}>
+                <Draggable bounds="parent"  onDrag={onDrag} onStop={() => setShowRuler(false)}>
+                    <div style={{ width: 250, position: 'relative', cursor: 'move' }}>
                         {/* <div>
                             <h1 style={{ fontSize: props.imageSize + 'px' }}>hello</h1>
 
@@ -98,52 +104,52 @@ const CanvaNew = React.forwardRef((props, ref) => {
                 </Draggable>
 
 
-                <Draggable bounds="parent" grid={[100, 100]}  >
+                <Draggable bounds="parent"  onDrag={onDrag} onStop={() => setShowRuler(false)}>
                     <div style={{ width: 150, position: 'relative' }}>
                         <p style={{ fontFamily: props.changeFont, fontSize: props.changeFsize }}  >{props.number}</p>
                     </div>
                 </Draggable>
 
-                <Draggable bounds="parent"  >
+                <Draggable bounds="parent"  onDrag={onDrag} onStop={() => setShowRuler(false)}>
                     <div style={{ width: 150, position: 'relative' }}>
                         <p style={{ fontFamily: props.changeFont, color: 'black', fontSize: props.changeFsize }} >{props.address}</p>
                     </div>
                 </Draggable>
 
-                <Draggable bounds="parent"  >
+                <Draggable bounds="parent"  onDrag={onDrag} onStop={() => setShowRuler(false)}>
                     <div style={{ width: 150 }}>
                         <p style={{ fontFamily: props.changeFont, color: 'black', fontSize: props.changeFsize }} >{props.email}</p>
                     </div>
                 </Draggable>
 
 
-                <Draggable bounds="parent"  >
+                <Draggable bounds="parent"  onDrag={onDrag} onStop={() => setShowRuler(false)}>
                     <div style={{ width: 150, position: 'relative' }}>
                         <p style={{ fontFamily: props.changeFont, color: 'black' }} >{props.text1}</p>
                     </div>
                 </Draggable>
 
-                <Draggable bounds="parent"  >
+                <Draggable bounds="parent"  onDrag={onDrag} onStop={() => setShowRuler(false)}>
                     <div style={{ width: 150, position: 'relative' }}>
                         <p style={{ fontFamily: props.changeFont, color: 'black' }} >{props.text2}</p>
                     </div>
                 </Draggable>
-                <Draggable bounds="parent"  >
+                <Draggable bounds="parent"  onDrag={onDrag} onStop={() => setShowRuler(false)}>
                     <div style={{ width: 150, position: 'relative' }}>
                         <p style={{ fontFamily: props.changeFont, color: 'black' }} >{props.text3}</p>
                     </div>
                 </Draggable>
-                <Draggable bounds="parent"  >
+                <Draggable bounds="parent"  onDrag={onDrag} onStop={() => setShowRuler(false)}>
                     <div style={{ width: 150, position: 'relative' }}>
                         <p style={{ fontFamily: props.changeFont, color: 'black' }} >{props.text4}</p>
                     </div>
                 </Draggable>
-                <Draggable bounds="parent"  >
+                <Draggable bounds="parent"  onDrag={onDrag} onStop={() => setShowRuler(false)}>
                     <div style={{ width: 150, position: 'relative' }}>
                         <p style={{ fontFamily: props.changeFont, color: 'black' }} >{props.text5}</p>
                     </div>
                 </Draggable>
-                <Draggable bounds="parent"  >
+                <Draggable bounds="parent"  onDrag={onDrag} onStop={() => setShowRuler(false)}>
                     <div style={{ width: 150, position: 'relative' }}>
                         <p style={{ fontFamily: props.changeFont, color: 'black' }} >{props.text6}</p>
                     </div>
@@ -163,11 +169,11 @@ const MyComponent = (props) => {
             <CanvaNew {...props} ref={componentRef} />
             <button onClick={() => exportComponentAsJPEG(componentRef)} className="btn-download">
                 Export As JPEG
-        </button>
+            </button>
 
             <button onClick={() => exportComponentAsPNG(componentRef)} className="btn-download">
                 Export As PNG
-        </button>
+            </button>
         </React.Fragment>);
 }
 
