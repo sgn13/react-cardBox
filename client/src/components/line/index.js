@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react';
 
 const defaultStyleValue = {
   anchor      : { x: 0.5, y: 0.5 },
-  borderColor : 'blue',
-  borderStyle : 'dotted',
+  borderColor : 'gray',
+  borderStyle : 'dashed',
   borderWidth : 2
 }
 
