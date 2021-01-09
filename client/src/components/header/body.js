@@ -7,8 +7,7 @@ class Bodys extends Component {
     render() {
         return (<div>
             <Sidebar />
-            {/* <Canva /> */}
-            {/* <Text /> */}
+
         </div>);
     }
 }

@@ -5,9 +5,29 @@ import ImageF from './imageF'
 import UploadImage from './uploadImg'
 import immm from '../../image/banner.jpg'
 import './filter.css'
+import { toJpeg, toPng } from 'html-to-image'
 import ReactToPrint from 'react-to-print';
 import { exportComponentAsJPEG, exportComponentAsPDF, exportComponentAsPNG } from "react-component-export-image";
 
+const IMAGE_TYPE = {
+    JPEG: 'JPEG',
+    PNG: 'PNG',
+}
+
+const getImageConverter = (imageType) => {
+    switch (imageType) {
+        case IMAGE_TYPE.JPEG: return toJpeg;
+        case IMAGE_TYPE.PNG: return toPng;
+        default: return null;
+    }
+}
+const getImageName = (imageType) => {
+    switch (imageType) {
+        case IMAGE_TYPE.JPEG: return 'sample.jpeg';
+        case IMAGE_TYPE.PNG: return 'sample.png';
+        default: return null;
+    }
+}
 
 const DEFAULT_OPTIONS = [
     {
@@ -182,39 +202,41 @@ const FilterImage = React.forwardRef((props, ref) => {
     )
 })
 
+const createImage = (imageType) => {
+    const targetNodeId = 'main-image';
+    const targetNode = document.getElementById(targetNodeId);
+    const imageConverter = getImageConverter(imageType);
+
+    if (!targetNode) return alert(`Target Dom: ${targetNodeId} doesn't exist`);
+    if (!imageConverter) return alert(`Invalid Image Type: ${imageType}`);
+
+    imageConverter(targetNode)
+        .then((dataUrl) => {
+            const img = new Image();
+            const link = document.createElement('a');
+            img.src = dataUrl;
+            link.download = getImageName(imageType);
+            link.href = dataUrl;
+            link.click();
+        })
+        .catch((error) => console.error('Image convert error!', error));
+}
+
 const MyComponent = (props) => {
     const componentRef = useRef();
 
     return (
         <React.Fragment>
             <FilterImage {...props} ref={componentRef} />
-            <button onClick={() => exportComponentAsJPEG(componentRef)} className="btn-download">
+            <button onClick={() => createImage(IMAGE_TYPE.JPEG)} className="btn-download">
                 Export As JPEG
         </button>
 
 
-            <button onClick={() => exportComponentAsPNG(componentRef)} className="btn-download">
+            <button onClick={() => createImage(IMAGE_TYPE.PNG)} className="btn-download">
                 Export As PNG
         </button>
         </React.Fragment>);
 }
 
 export default MyComponent;
-
-// export default FilterImage
-
-// const Example = () => {
-//     const componentRef = useRef();
-
-//     return (
-//         <div>
-//             <ReactToPrint
-//                 trigger={() => <button className="btn-download"> Download</button>}
-//                 content={() => componentRef.current}
-//             />
-//             <FilterImage ref={componentRef} />
-//         </div>
-//     );
-// };
-
-// export default Example

@@ -15,7 +15,7 @@ import { Provider } from 'react-redux';
 import store from './components/flux/store';
 import { loadUser } from './components/flux/action/authAction';
 import FilterImage from './components/filter/filter_image';
-import BannerCanva from './components/canva/banner-canva';
+// import BannerCanva from './components/canva/banner-canva';
 import ReactUploadImage from './components/canva/UploadImage';
 import ImageContainer from './components/canva/SavedImage';
 

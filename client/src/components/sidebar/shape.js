@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Stage, Layer, Rect, Text, Circle, Line } from 'react-konva';
-import Konva from 'konva';
 
 class Shapes extends Component {
     state = {}

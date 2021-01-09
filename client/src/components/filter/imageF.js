@@ -3,7 +3,7 @@ class ImageF extends Component {
     state = {}
     render() {
         return (
-            <div className="main-image" style={this.props.getImageStyle} >
+            <div id="main-image" className="main-image" style={this.props.getImageStyle} >
 
                 {this.props.img && <img src={URL.createObjectURL(this.props.img)} ></img>}
 

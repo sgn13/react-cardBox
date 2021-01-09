@@ -4,7 +4,7 @@ import Canva from './canva/canva'
 import CanvaNew from './canva/canvaNew'
 import Text from './sidebar/text'
 import { Button } from 'react-bootstrap';
-import Image from '../image/businessCard/business_background.jpg'
+import cardB1 from '../image/businessCard/cardB_1.jpg'
 import Shape from './sidebar/shape'
 import { SketchPicker } from 'react-color';
 import BannerCanva from './canva/banner-canva';
@@ -31,10 +31,10 @@ class Sidebar extends Component {
         bold: '',
         italic: '',
         underline: '',
-        company: 'Company Name',
-        phone: '9841653684',
-        address: 'kathmandu,Nepal',
-        email: 'kathmandujob@gmail.com',
+        company: 'Text1',
+        phone: 'Text2',
+        address: 'Text3',
+        email: 'Text4',
         text1: '',
         text2: '',
         text3: '',
@@ -220,6 +220,7 @@ class Sidebar extends Component {
                     <div id="templates" className="tabcontent" style={{ display: "none" }}>
                         <Button variant="danger" onClick={this.closeTab} style={{ float: 'right' }}>X</Button>
                         <h3 >Templates</h3>
+                        <img src={cardB1} width="100%"></img>
 
                     </div>
 
@@ -311,6 +312,7 @@ class Sidebar extends Component {
                             <option value="30px">30</option>
                             <option value="60px">60</option>
                         </select>
+                        <br></br>
 
                         <Button variant="warning" className=" mr-sm-1" onClick={this.makeBold} id="bold" value="bold">B</Button>
                         <Button variant="warning" className=" mr-sm-1" onClick={this.makeBold} id="italic" value="bold">I</Button>
@@ -318,16 +320,14 @@ class Sidebar extends Component {
 
 
                         <div id="information" >
-                            <span>Company name</span>
-
-
-                            <input type='text' placeholder="Company name" onChange={this.changeData} id="company"></input><br />
-                            <span>Phone</span><br />
-                            <input type='text' placeholder="Phone number" onChange={this.changeData} id="phone"></input><br />
-                            <span>Address</span><br />
-                            <input type='text' placeholder="Address" onChange={this.changeData} id="address"></input><br />
-                            <span>Email</span><br />
-                            <input type='text' placeholder="Email" onChange={this.changeData} id="email"></input>
+                            <span>Text 1</span><br />
+                            <input type='text' placeholder="Text 1" onChange={this.changeData} id="company"></input><br />
+                            <span>Text 2</span><br />
+                            <input type='text' placeholder="Text 2" onChange={this.changeData} id="phone"></input><br />
+                            <span>Text 3</span><br />
+                            <input type='text' placeholder="Text 3" onChange={this.changeData} id="address"></input><br />
+                            <span>Text 4</span><br />
+                            <input type='text' placeholder="Text 4" onChange={this.changeData} id="email"></input>
                             <br />
                             <br />
                             {/* <button onClick={this.addText}>Add</button> */}
@@ -376,6 +376,7 @@ class Sidebar extends Component {
                     selectedColor={selectedColor}
                     company={company}
                     number={phone}
+                    cardBackground={cardB1}
                     address={address}
                     email={email}
                     text1={text1}
