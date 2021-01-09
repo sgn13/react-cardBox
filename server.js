@@ -32,6 +32,7 @@ mongoose.connect(db,{
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/img',require('./routes/api/img'));
+//app.use('/api/controller',require('./routes/api/controller'));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

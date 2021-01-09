@@ -18,6 +18,9 @@ import FilterImage from './components/filter/filter_image';
 import BannerCanva from './components/canva/banner-canva';
 import ReactUploadImage from './components/canva/UploadImage';
 import ImageContainer from './components/canva/SavedImage';
+import admin from './components/controller/admin';
+import delete1 from './components/controller/delete';
+import deleteImg from './components/controller/deletephoto';
 
 class App extends Component {
   componentDidMount() {
@@ -38,6 +41,9 @@ class App extends Component {
           <Route path='/' exact component={Home} />
           <Route path='/uploadImg' component={ReactUploadImage} />
           <Route path='/savedImg' component={ImageContainer} />
+          <Route path='/admin' component={admin} />
+          <Route path='/delete/:id' component={delete1} />
+          <Route path='/deleteImg' component={deleteImg} />
         </BrowserRouter>
       </Provider>
     );

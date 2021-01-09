@@ -10,6 +10,11 @@ import { SketchPicker } from 'react-color';
 import BannerCanva from './canva/banner-canva';
 import { storage } from '../components/firebase/firebaseConfig'
 import { v4 as uuidv4 } from 'uuid';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import LoginModal from '../components/auth/LoginModel'
+
+import { NavItem } from 'react-bootstrap';
 
 
 // import { Wrapper } from 'react-download-svg'
@@ -49,6 +54,11 @@ class Sidebar extends Component {
         items: []
 
     }
+    static propTypes = {
+        isAuthenticated: PropTypes.bool,
+        
+
+    };
     handleFont = (e) => {
         this.setState({
             imageSize: e.target.value
@@ -200,6 +210,8 @@ class Sidebar extends Component {
 
         const { color, item, items, font, fontsize, bold, changeBackImage, selectedColor, company, phone, address, email, text1, text2, text3, text4, text5, imageSize } = this.state;
         return (
+            <div>
+            {this.props.isAuthenticated ?
             <div id="darkside">
 
                 <div>
@@ -395,10 +407,28 @@ class Sidebar extends Component {
                     imageUpload={this.handleImageUpload}
                 />
             </div >
+            :
+            <div className="login" style={{textAlign:"center" , marginTop:"100px"}}>
+            <h1>  Please login to continue.....</h1>
+            <Button variant="outline-secondary" className="mr-sm-4" > 
+                <NavItem>
+                    <LoginModal />
+                </NavItem></Button>
+            </div>
+    }
+            </div>
         );
     }
 }
 
+const mapStateToProps = state =>(
+    {
+        isAuthenticated: state.auth.isAuthenticated,
+        
+    }
+);
 
-
-export default Sidebar;
+export default connect(
+    mapStateToProps,
+    {}
+)(Sidebar);

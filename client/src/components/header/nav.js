@@ -28,7 +28,7 @@ class nav extends Component {
     };
     render() {
         const { isAuthenticated, user } = this.props.auth;
-
+        
         const authLinks = (
             <Fragment>
                 <NavItem >
@@ -91,7 +91,8 @@ class nav extends Component {
                                 </ul>
                             </div>
                             <div className="social">
-                                {isAuthenticated ? authLinks : guestLinks}
+                                
+                                {isAuthenticated ? authLinks  : guestLinks}
 
                             </div>
                         </div>
